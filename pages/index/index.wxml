@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class="default">
+  <view class="default">
+    <image src="../../assets/globalMsg.png" mode="widthFix" class="globalMsg-image default"></image>
+  </view>
+  <view class="topNav-view"> 
+    <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image"></image>
+  </view>
+  <view class="image-view">
+    <image src="../../assets/email.png" mode="widthFix" class="email-image"></image>
+  </view>
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>

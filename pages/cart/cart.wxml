@@ -1,0 +1,5 @@
+<!--cart.wxml-->
+
+<view class="default-view">
+  This is a cart page.
+</view>

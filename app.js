@@ -34,6 +34,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    apiBaseUrl: 'http://localhost:10010'
   }
 })

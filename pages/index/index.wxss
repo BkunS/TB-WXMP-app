@@ -7,20 +7,55 @@
 }
 
 .globalMsg-view {
-  height: auto;
-  display:inline-block;
-  position: static;
+  display: flex;
+  position: fixed;
+  margin: 0 auto;
+  z-index: 9999;
+  top: 0;
+  left: 0; 
+  right: 0;
 }
 
 .topNav-view {
   display: flex;
-  z-index: 1;
-  position: relative;
+  flex-direction: column;
+  z-index: 9999;
+  margin: 0 auto;
+  position: fixed;
   top: 0;
+  left: 0; 
+  right: 0;
 }
 .topNav-image {
-  height: 140rpx;
   z-index: 1;
+  width: 100vw;
+  left: 0; 
+  right: 0;
+}
+
+.placeholder-view {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin: 0rpx 0;
+}
+
+.heroText-view {
+  padding: 15rpx 50rpx; 
+  text-align: center; 
+  margin-bottom: 50rpx;
+}
+
+.heroText-font {
+  font-size: 30rpx;
+}
+
+.categoryText-font {
+  font-size: 25rpx;
+  font-weight: 600;
 }
 
 .email-image {
@@ -28,23 +63,17 @@
   height: 840rpx;
 }
 
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.category-list-view {
+  width: 50vw;
+  float: left;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.category-item-view {
+  text-align: center;
+  margin: 15rpx 15rpx;
+  padding-bottom: 30rpx;
 }
 
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
+.category-item-image {
+  width: 100%;
 }

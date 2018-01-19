@@ -1,1 +1,17 @@
 /* pages/product/product.wxss */
+
+.title-view {
+  text-align: center;
+}
+
+.title-font {
+  font-size: 30rpx;
+}
+
+.price-font {
+  font-size: 25rpx;
+}
+
+.swiper-view {
+  height: 800rpx;
+}

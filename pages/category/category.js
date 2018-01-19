@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pageContents: {},
     category: {}
   },
 
@@ -15,7 +16,18 @@ Page({
    */
   onLoad: function (options) {
     const page = this;
-
+    wx.request({
+      method: 'GET',
+      url: app.globalData.apiBaseUrl + '/v1/contents/' + options.id,
+      header: {
+        'content-type': 'application/json'
+      },
+      success: (res) => {
+        page.setData({
+          pageContents: res.data
+        })
+      }
+    })
     wx.request({
       method: 'GET',
       url: app.globalData.apiBaseUrl + '/v1/categories/' + options.id,

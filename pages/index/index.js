@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    landingContents: {},
+    pageContents: {},
     categories:[],
     userInfo: {},
     hasUserInfo: false,
@@ -16,13 +16,13 @@ Page({
 
     wx.request({
       method: 'GET',
-      url: app.globalData.apiBaseUrl + '/v1/landingContents',
+      url: app.globalData.apiBaseUrl + '/v1/contents/home',
       header: {
         'content-type': 'application/json'
       },
       success: (res) => {
         page.setData({
-          landingContents: res.data
+          pageContents: res.data
         })
       }
     })

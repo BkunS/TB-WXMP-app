@@ -15,6 +15,63 @@
   padding: 0rpx 0;
 }
 
+.default-image {
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0rpx 0;
+  padding: 0rpx 0;
+}
+
 .default-font {
   font-family: FZYouHJW_ZhongXi, Helvetica, Tahoma, sans-serif!important;
 }
+
+.globalMsg-view {
+  display: flex;
+  position: fixed;
+  margin: 0 auto;
+  z-index: 9999;
+  top: 0;
+  left: 0; 
+  right: 0;
+}
+
+.topNav-view {
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0; 
+  right: 0;
+}
+.topNav-image {
+  z-index: 1;
+  width: 100vw;
+  left: 0; 
+  right: 0;
+}
+
+.placeholder-view {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin: 0rpx 0;
+}
+
+.textLineThrough {
+  text-decoration:line-through;
+}
+
+.list-wrapper-view {
+  width: calc(100vw - 50rpx);
+  padding: 0 25rpx;
+  float: left;
+}
+

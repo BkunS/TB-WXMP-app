@@ -1,36 +1,35 @@
 <!--index.wxml-->
 <view class="default-view">
-  <view class="default-view globalMsg-view">
-    
-  </view>
   <view class="topNav-view">
-    <image src="../../assets/globalMsg.png" mode="widthFix" class="image-view default-view"></image>
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view"></image>
     <navigator url="/pages/cart/cart">
       <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image"></image>
     </navigator>
   </view>
-
   <view class="placeholder-view">
-    <image src="../../assets/globalMsg.png" mode="widthFix" class="image-view default-view"></image>
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view"></image>
     <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image"></image>
-  </view> 
+  </view>
+
   <view class="default-view">
-    <video src="{{landingContents.heroVideo}}" autoplay loop muted objectFit="cover" style="width: 100vw"></video>
+    <video src="{{pageContents.heroContents.heroVideo}}" autoplay loop muted objectFit="cover" style="width: 100vw"></video>
     <view class="heroText-view">
-      <text class="default-font heroText-font">{{landingContents.heroText}}</text>
+      <text class="default-font heroText-font">{{pageContents.heroContents.heroText}}</text>
     </view>
   </view>
 
-  <view wx:for="{{categories}}" wx:key="id" class="default-view category-list-view">
-    <view class="category-item-view">
-      <navigator url="/pages/category/category?id={{item.id}}">
-        <image src="{{item.image}}" class="category-item-image" mode="aspectFill"></image>
-        <text class="default-font categoryText-font"> {{item.displayName}} </text>
-      </navigator>
+  <view class="default-view list-wrapper-view">
+    <view wx:for="{{categories}}" wx:key="id" class="default-view category-list-view">
+      <view class="category-item-view">
+        <navigator url="/pages/category/category?id={{item.id}}">
+          <image src="{{item.image}}" class="default-image" mode="widthFix"></image>
+          <text class="default-font categoryText-font"> {{item.displayName}} </text>
+        </navigator>
+      </view>
     </view>
   </view>
   
-  <view class="image-view">
-    <image src="../../assets/email.png" mode="widthFix" class="email-image"></image>
+  <view class="default-view">
+    <image src="../../assets/email.png" mode="widthFix" class="default-image"></image>
   </view>
 </view>

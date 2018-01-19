@@ -1,5 +1,35 @@
 <!--product.wxml-->
 
 <view class="default-view">
+  <view class="topNav-view">
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="image-view default-view" />
+    <navigator url="/pages/cart/cart">
+      <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image" />
+    </navigator>
+  </view>
+  <view class="placeholder-view">
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="image-view default-view" />
+    <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image" />
+  </view>
 
+  <view class="default-view title-view">
+    <text class="title-font"> {{product.displayName}}\n </text>
+    <text class="default-font price-font textLineThrough"> {{product.priceStr}} </text>
+    <text class="default-font price-font"> {{product.salePriceStr}} </text>
+  </view>
+
+  <view class="default-view" style="height: {{imgHeights[current]}}rpx;">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular
+      bindchange="bindchange" style="height: {{imgHeights[current]}}rpx;">
+      <block wx:for="{{product.images}}" wx:key="{{product.images}}">
+        <swiper-item>
+          <image src="{{item}}" class="default-image swiper-image" mode="widthFix" bindload="imageLoad"/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <view class="default-view">
+    <image src="../../assets/pdpRatingModule.png" mode="widthFix" class="default-image"></image>
+  </view>
 </view>

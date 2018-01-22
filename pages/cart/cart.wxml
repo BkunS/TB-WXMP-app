@@ -1,5 +1,24 @@
 <!--cart.wxml-->
 
 <view class="default-view">
-  This is a cart page.
+  <view class="topNav-view">
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" bindload="globalMsgLoad"></image>
+    <navigator url="/pages/cart/cart">
+      <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image" bindload="topNavLoad"></image>
+    </navigator>
+  </view>
+  <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
+  </view>
+  <view wx:for="{{cart}}" wx:key="productId" class="default-view cart-list-view">
+    <view class="product-item-view">
+      <navigator url="/pages/product/product?id={{item.id}}">
+        <image src="{{item.image}}" class="product-item-image" mode="widthFix"></image>
+        <view class="nameTag-view">
+          <text class="default-font productText-font"> {{item.displayName}}\n </text>
+          <text class="default-font price-font textLineThrough"> {{item.price}} </text>
+          <text class="default-font price-font"> {{item.salePrice}} </text>
+        </view>
+      </navigator>
+    </view>
+  </view>
 </view>

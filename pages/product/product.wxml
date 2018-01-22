@@ -18,8 +18,8 @@
 
   <view class="default-view" style="height: {{imgHeights[current]}}rpx;">
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular
-      bindchange="bindchange" style="height: {{imgHeights[current]}}rpx;">
-      <block wx:for="{{product.images}}" wx:key="{{product.images}}">
+      bindchange="currentChange" current="{{current}}" style="height: {{imgHeights[current]}}rpx;">
+      <block wx:for="{{product.variations[selectedColorIndex].images}}" wx:key="{{current}}">
         <swiper-item>
           <image src="{{item}}" class="default-image swiper-image" mode="widthFix" bindload="imageLoad"/>
         </swiper-item>
@@ -32,12 +32,22 @@
   </view>
 
   <view class="default-view">
+    <text class="color-text"> 颜色：{{selectedColorName}} </text>
     <radio-group class="radio-group" bindchange="radioChange">
       <label wx:for="{{product.variations}}" wx:key="{{product.variations.index}}">
         <radio style="display:none;" value="{{item.index}}" checked="{{item.checked}}"/>
         <canvas canvas-id="{{item.color}}Canvas" class="circle-canvas"></canvas>
-        <!--<text class="text"> {{item.displayColorName}} </text> -->
       </label>
     </radio-group>
+  </view>
+  <view class="default-view">
+    <picker value="{{selectedSizes[selectedSizeIndex].id}}" range="{{selectedSizes}}" range-key="{{'size'}}" bindchange="pickerSelected"> 
+      <view class="picker-view"> <view style="margin: auto">选择尺码：{{selectedSize}}</view> </view>
+    </picker>
+  </view>
+
+  <view class="button-view">
+    <button disabled="{{disabled}}" loading="{{buttonLoading}}" class="button addToCart-button" bindtap="addToCart" hover-class="button-hover">{{addToCartBTText}}</button> 
+    <button disabled="{{disabled}}" loading="{{buttonLoading}}" class="button buyNow-button" bindtap="buyNow" hover-class="button-hover" plain>{{buyNowBTText}}</button> 
   </view>
 </view>

@@ -1,1 +1,5 @@
 /* pages/cart/cart.wxss */
+
+.cart-list-view {
+  padding: 20rpx;
+}

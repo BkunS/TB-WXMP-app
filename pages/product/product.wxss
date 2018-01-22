@@ -19,15 +19,45 @@
 .ui-radio radio,.ui-radio checkbox {
   display: none;
 }
-.ui-radio .text {
-/*设计样式*/
-}
-.ui-radio.checked .text {
-/*设计样式*/
+.color-text {
+  font-size: 30rpx;
+  padding: 0 30rpx;
 }
 
 .circle-canvas {
   display: inline-block;
   width: 100rpx;
   height: 100rpx;
+}
+
+.picker-view {
+  margin: 0 30rpx;
+  height: 60rpx;
+  font-size: 30rpx;
+  padding: 10rpx 30rpx;
+  border:3rpx solid grey;
+  text-align: center;
+}
+
+.button-view {
+  margin: 30rpx 0;
+  padding: 0 40rpx;
+}
+
+.button {
+  margin: 20rpx 0;
+}
+
+.addToCart-button {
+  color: white; 
+  background-color: #0c2340;
+}
+
+.buyNow-button {
+  color: #0c2340;
+}
+
+.button-hover {
+  color: grey;
+  background-color: black;
 }

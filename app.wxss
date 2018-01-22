@@ -22,6 +22,7 @@
   right: 0;
   margin: 0rpx 0;
   padding: 0rpx 0;
+  height: auto;
 }
 
 .default-font {

@@ -10,12 +10,15 @@
   </view>
 
   <view class="default-view">
-    <video src="{{pageContents.heroContents.heroVideo}}" autoplay loop muted objectFit="cover" style="width: 100vw"></video>
-    <view class="heroText-view">
-      <text class="default-font heroText-font">{{pageContents.heroContents.heroText}}</text>
-    </view>
+    <navigator url="/pages/lookbook/lookbook">
+      <image src="{{pageContents.lookbooks[0].img}}" class="default-image" mode="widthFix" />
+      <view class="lookbook-text-view"> {{pageContents.lookbooks[0].text}} </view>
+    </navigator>
   </view>
 
+  <view class="default-view" class="categories-title-view">
+    <text> 商品分类 </text>
+  </view>
   <view class="default-view list-wrapper-view">
     <view wx:for="{{categories}}" wx:key="id" class="default-view category-list-view">
       <view class="category-item-view">
@@ -27,6 +30,13 @@
     </view>
   </view>
   
+  <view class="default-view">
+    <video src="{{pageContents.heroContents.heroVideo}}" autoplay loop muted objectFit="cover" style="width: 100vw"></video>
+    <view class="heroText-view">
+      <text class="default-font heroText-font">{{pageContents.heroContents.heroText}}</text>
+    </view>
+  </view>
+
   <view class="default-view">
     <image src="../../assets/email.png" mode="widthFix" class="default-image"></image>
   </view>

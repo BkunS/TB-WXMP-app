@@ -1,4 +1,12 @@
 /**index.wxss**/
+.lookbook-text-view {
+  top: 30%; 
+  left: 20%;
+  position: absolute;
+  color: white;
+  font-family: noto_sans_sc_regular;
+}
+
 .heroText-view {
   padding: 15rpx 50rpx; 
   text-align: center; 
@@ -7,6 +15,7 @@
 
 .heroText-font {
   font-size: 30rpx;
+  font-family: noto_sans_sc_regular;
 }
 
 .categoryText-font {
@@ -30,4 +39,10 @@
   top: 0;
   left: 0;
   right: 0;
+}
+
+.categories-title-view {
+  margin-top: 70rpx;
+  margin-bottom: 30rpx;
+  text-align: center;
 }

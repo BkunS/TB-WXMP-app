@@ -59,6 +59,21 @@ Page({
       imgHeights: imgHeights,
     })
   },
+  radioLoad: function () {
+    const page = this;
+    this.data.product.variations.forEach((variation) => {
+      let ctx = wx.createCanvasContext(variation.color.replace(/' '/g, '_') + 'Canvas')
+      ctx.arc(30, 30, 15, 0, 2 * Math.PI)
+      if (variation.index === page.data.selectedColorIndex) {
+        ctx.setStrokeStyle("green")
+        ctx.setLineWidth(5)
+      }
+      ctx.stroke()
+      ctx.setFillStyle(variation.colorHex || variation.color)
+      ctx.fill()
+      ctx.draw()
+    })
+  },
   currentChange: function (e) {
     this.setData({ current: e.detail.current })
   },
@@ -139,9 +154,6 @@ Page({
   buyNow: function (e) {
     console.log(e);
   },
-  onPullDownRefresh: function () {
-    wx.stopPullDownRefresh()
-  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -196,6 +208,7 @@ Page({
           selectedSizes: product.variations[selectedColorIndex].sizes,
           selectedColorName: product.variations[selectedColorIndex].colorName
         });
+        page.radioLoad();
       }
     })
   },
@@ -204,19 +217,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    const page = this;
-    this.data.product.variations.forEach((variation) => {
-      let ctx = wx.createCanvasContext(variation.color.replace(/' '/g, '_') + 'Canvas')
-      ctx.arc(30, 30, 15, 0, 2 * Math.PI)
-      if (variation.index === page.data.selectedColorIndex) {
-        ctx.setStrokeStyle("green")
-        ctx.setLineWidth(5)
-      }
-      ctx.stroke()
-      ctx.setFillStyle(variation.colorHex || variation.color)
-      ctx.fill()
-      ctx.draw()
-    })
+    
   },
 
   /**
@@ -244,7 +245,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    
   },
 
   /**

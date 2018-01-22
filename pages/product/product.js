@@ -9,25 +9,52 @@ Page({
   data: {
     pageContents: {},
     product: {},
+    selected: 1,
     current: 0,
     imgHeights: [],
+    placeholderHeight: 12,
     indicatorDots: true,
     autoplay: false,
     interval: 5000,
     duration: 1000
   },
+  globalMsgLoad: function (e) {
+    const imgWidth = e.detail.width
+    const imgHeight = e.detail.height
+    const ratio = imgWidth / imgHeight;
+    const viewWidth = 750;
+    const viewHeight = 750 / ratio;
+    this.setData({
+      placeholderHeight: this.data.placeholderHeight + viewHeight,
+    })
+  },
+  topNavLoad: function (e) {
+    const imgWidth = e.detail.width
+    const imgHeight = e.detail.height
+    const ratio = imgWidth / imgHeight;
+    const viewWidth = 750;
+    const viewHeight = 750 / ratio;
+    this.setData({
+      placeholderHeight: this.data.placeholderHeight + viewHeight,
+    })
+  },
   imageLoad: function (e) {
     let imgHeights = this.data.imgHeights
-    const imgHeight = e.detail.height  
-    imgHeights.push(imgHeight)
+    const imgWidth = e.detail.width
+    const imgHeight = e.detail.height
+    const ratio = imgWidth / imgHeight
+    const viewWidth = 750;
+    const viewHeight = viewWidth / ratio
+    imgHeights.push(viewHeight)
     this.setData({
       imgHeights: imgHeights,
     })
-    console.log(imgHeights);
   },
   bindChange: function (e) {
-    console.log(e.detail.current)
     this.setData({ current: e.detail.current })
+  },
+  radioChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
   },
 
   /**
@@ -77,6 +104,7 @@ Page({
         page.setData({
           product: product
         });
+        console.log(product)
       }
     })
   },
@@ -85,7 +113,15 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    this.data.product.variations.forEach((variation) => {
+      let ctx = wx.createCanvasContext(variation.color + 'Canvas');
+      ctx.arc(39, 30, 15, 0, 2 * Math.PI);
+      ctx.stroke();
+      ctx.setFillStyle(variation.color);
+      ctx.fill();
+      ctx.draw()
+    })
+    
   },
 
   /**

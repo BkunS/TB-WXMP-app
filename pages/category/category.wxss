@@ -1,7 +1,7 @@
 /* pages/category/category.wxss */
 
 .landing-view {
-  padding: 50rpx 0;
+  padding: 40rpx 0;
 }
 
 .filterAndSort-view {
@@ -9,7 +9,7 @@
 }
 
 .product-list-view {
-  width: calc(50vw - 25rpx);
+  width: calc(50vw - 26rpx);
   float: left;
 }
 

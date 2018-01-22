@@ -8,7 +8,28 @@ Page({
    */
   data: {
     pageContents: {},
-    category: {}
+    category: {},
+    placeholderHeight: 12,
+  },
+  globalMsgLoad: function (e) {
+    const imgWidth = e.detail.width
+    const imgHeight = e.detail.height
+    const ratio = imgWidth / imgHeight;
+    const viewWidth = 750;
+    const viewHeight = 750 / ratio;
+    this.setData({
+      placeholderHeight: this.data.placeholderHeight + viewHeight,
+    })
+  },
+  topNavLoad: function (e) {
+    const imgWidth = e.detail.width
+    const imgHeight = e.detail.height
+    const ratio = imgWidth / imgHeight;
+    const viewWidth = 750;
+    const viewHeight = 750 / ratio;
+    this.setData({
+      placeholderHeight: this.data.placeholderHeight + viewHeight,
+    })
   },
 
   /**

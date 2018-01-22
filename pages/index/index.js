@@ -6,9 +6,30 @@ Page({
   data: {
     pageContents: {},
     categories:[],
+    placeholderHeight: 12,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
+  },
+  globalMsgLoad: function (e) {
+    const imgWidth = e.detail.width
+    const imgHeight = e.detail.height
+    const ratio = imgWidth / imgHeight;
+    const viewWidth = 750;
+    const viewHeight = 750 / ratio;
+    this.setData({
+      placeholderHeight: this.data.placeholderHeight + viewHeight,
+    })
+  },
+  topNavLoad: function (e) {
+    const imgWidth = e.detail.width
+    const imgHeight = e.detail.height
+    const ratio = imgWidth / imgHeight;
+    const viewWidth = 750;
+    const viewHeight = 750 / ratio;
+    this.setData({
+      placeholderHeight: this.data.placeholderHeight + viewHeight,
+    })
   },
 
   onLoad: function () {

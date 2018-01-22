@@ -2,14 +2,12 @@
 
 <view class="default-view">
   <view class="topNav-view">
-    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view"></image>
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" bindload="globalMsgLoad"></image>
     <navigator url="/pages/cart/cart">
-      <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image"></image>
+      <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image" bindload="topNavLoad"></image>
     </navigator>
   </view>
-  <view class="placeholder-view">
-    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view"></image>
-    <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image"></image>
+  <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
   </view>
 
   <view class="default-view landing-view">

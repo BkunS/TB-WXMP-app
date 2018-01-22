@@ -15,3 +15,19 @@
 .swiper-view {
   height: 800rpx;
 }
+
+.ui-radio radio,.ui-radio checkbox {
+  display: none;
+}
+.ui-radio .text {
+/*设计样式*/
+}
+.ui-radio.checked .text {
+/*设计样式*/
+}
+
+.circle-canvas {
+  display: inline-block;
+  width: 100rpx;
+  height: 100rpx;
+}

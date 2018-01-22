@@ -2,14 +2,12 @@
 
 <view class="default-view">
   <view class="topNav-view">
-    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="image-view default-view" />
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" bindload="globalMsgLoad"></image>
     <navigator url="/pages/cart/cart">
-      <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image" />
+      <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image" bindload="topNavLoad"></image>
     </navigator>
   </view>
-  <view class="placeholder-view">
-    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="image-view default-view" />
-    <image src="../../assets/topNav.png" mode="widthFix" class="topNav-image" />
+  <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
   </view>
 
   <view class="default-view title-view">
@@ -31,5 +29,15 @@
 
   <view class="default-view">
     <image src="../../assets/pdpRatingModule.png" mode="widthFix" class="default-image"></image>
+  </view>
+
+  <view class="default-view">
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label wx:for="{{product.variations}}" wx:key="{{product.variations.index}}">
+        <radio style="display:none;" value="{{item.index}}" checked="{{item.checked}}"/>
+        <canvas canvas-id="{{item.color}}Canvas" class="circle-canvas"></canvas>
+        <!--<text class="text"> {{item.displayColorName}} </text> -->
+      </label>
+    </radio-group>
   </view>
 </view>

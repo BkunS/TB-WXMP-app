@@ -15,7 +15,7 @@
 }
 
 .category-list-view {
-  width: calc(50vw - 25rpx);
+  width: calc(50vw - 26rpx);
   float: left;
 }
 

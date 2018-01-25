@@ -18,7 +18,9 @@ Page({
   },
 
   getUserInfo: function (e) {
-    console.log(e)
+    wx.setNavigationBarTitle({
+      title: '我的账户'
+    })
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

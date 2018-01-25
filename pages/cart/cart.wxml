@@ -9,16 +9,59 @@
   </view>
   <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
   </view>
-  <view wx:for="{{cart}}" wx:key="productId" class="default-view cart-list-view">
-    <view class="product-item-view">
-      <navigator url="/pages/product/product?id={{item.id}}">
-        <image src="{{item.image}}" class="product-item-image" mode="widthFix"></image>
-        <view class="nameTag-view">
-          <text class="default-font productText-font"> {{item.displayName}}\n </text>
-          <text class="default-font price-font textLineThrough"> {{item.price}} </text>
-          <text class="default-font price-font"> {{item.salePrice}} </text>
+  
+  <view class="wrapper-view">
+    <view wx:for="{{cart}}" wx:key="productId" class="default-view cart-list-view">
+      <view class="product-item-view">
+        <view class="item-img-view">
+          <navigator url="/pages/product/product?id={{item.productInfo.masterId}}">
+            <image src="{{item.productInfo.image}}" class="item-image" mode="widthFix"></image>
+          </navigator>
         </view>
+        <view class="item-info-view">
+          <view class="nameTag-view">
+            <navigator url="/pages/product/product?id={{item.productInfo.masterId}}">
+              <text class="default-font item-name-font"> {{item.productInfo.displayName}}\n </text>
+            </navigator>
+            <view class="item-property-view">
+              <view class="description-property-view">
+                <text class='default-font item-property-font'> 商品：{{item.productInfo.styleId}}\n </text>
+                <text class="default-font item-property-font"> 颜色：{{item.productInfo.colorName}}\n </text>
+                <text class="default-font item-property-font"> 尺寸：{{item.productInfo.size}}\n </text>
+                <text class="default-font item-property-font"> 数量：{{item.quantity}}\n </text>
+                <text class="default-font price-font textLineThrough"> {{item.productInfo.priceStr}} </text>
+              </view>
+              <view class="price-property-view align-center">
+                <view bindtap="deleteItem" id="{{item.productId}}" class="default-font delete-font"> 删除 </view>  
+                <view class="default-font price-font"> {{item.productInfo.salePriceStr}} </view>
+              </view>
+            </view>
+          </view> 
+        </view>
+      </view>
+    </view>
+
+    <view style="margin: 0rpx 0; padding: 0rpx 0">
+      <view class="docker-title-view"> 订单小计 </view>
+      <view class="line"></view>
+      <view class="docker-detail-view"> 
+        <view class="docker-detail-list-view text-align-left"> 
+          <view class="docker-detail-item-view"> 商品总计：</view> 
+          <view class="docker-detail-item-view"> 运费：</view>
+          <view class="docker-detail-item-view"> 总计：</view>
+        </view>
+        <view class="docker-detail-list-view text-align-right"> 
+          <view class="docker-detail-item-view"> {{totalPriceStr}} </view>
+          <view class="docker-detail-item-view"> 免费 </view>
+          <view> {{totalPriceStr}} </view>
+        </view>
+      </view>
+      <view class="line"></view>
+      <navigator url="/pages/checkout/checkout">
+        <button disabled="{{disabled}}" class="button checkout-button" hover-class="button-hover">去结算</button>
       </navigator>
     </view>
+  </view>
+  <view class="default-view">
   </view>
 </view>

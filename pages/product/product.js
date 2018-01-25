@@ -119,7 +119,6 @@ Page({
     })
   },
   pickerSelected: function (e) {
-    //改变index值，通过setData()方法重绘界面
     const page = this
     this.setData({
       selectedSizeIndex: e.detail.value,
@@ -152,7 +151,10 @@ Page({
     })
   },
   buyNow: function (e) {
-    console.log(e);
+    this.addToCart(e);
+    wx.navigateTo({
+      url: '/pages/checkout/checkout',
+    })
   },
 
   /**
@@ -182,19 +184,20 @@ Page({
       },
       success: (res) => {
         let product = res.data;
+        const currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
         const priceRange = product.priceRange;
         const salePriceRange = product.salePriceRange;
         let priceStr = '';
-        let salePriceStr = '￥' + salePriceRange[0]
+        let salePriceStr = currencyStr + salePriceRange[0]
         if (salePriceRange[1]) {
-          salePriceStr += '-￥' + salePriceRange[1];
+          salePriceStr += '-' + currencyStr + salePriceRange[1];
         }
          
         if (salePriceRange[0] !== priceRange[0]) {
           priceStr = '￥' + priceRange[0];
         }
         if (priceRange[1] && priceRange[1] !== salePriceRange[1]) {
-          priceStr = '￥' + priceRange[0] + '-￥' + priceRange[1]
+          priceStr = currencyStr + priceRange[0] + '-' + currencyStr + priceRange[1]
         }
 
         product['salePriceStr'] = salePriceStr;
@@ -208,6 +211,9 @@ Page({
           selectedSizes: product.variations[selectedColorIndex].sizes,
           selectedColorName: product.variations[selectedColorIndex].colorName
         });
+        wx.setNavigationBarTitle({
+          title: product.displayName
+        })
         page.radioLoad();
       }
     })

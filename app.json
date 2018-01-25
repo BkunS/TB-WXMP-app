@@ -5,6 +5,8 @@
     "pages/category/category",
     "pages/product/product",
     "pages/cart/cart",
+    "pages/checkout/checkout",
+    "pages/blog/blog",
     "pages/profile/profile",
     "pages/logs/logs"
   ],
@@ -27,13 +29,13 @@
       },
       {
         "pagePath": "pages/logs/logs",
-        "text": "日志",
+        "text": "潮流资讯",
         "iconPath": "",
         "selectedIconPath": ""
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我",
+        "text": "我的",
         "iconPath": "",
         "selectedIconPath": ""
       }

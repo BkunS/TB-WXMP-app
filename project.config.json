@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
-	"appid": "touristappid",
-	"projectname": "ToryBurch%20MP",
+	"appid": "wx50ff3182db81edb6",
+	"projectname": "ToryBurch%20MP-demo",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -25,13 +25,25 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": -1,
 			"list": [
 				{
 					"id": 0,
 					"name": "PDP ",
 					"pathName": "pages/product/product",
 					"query": "id=CQAGDw4KCgoMCQQKBAcDBg"
+				},
+				{
+					"id": -1,
+					"name": "Lookbook",
+					"pathName": "pages/lookbook/lookbook",
+					"query": "id=BAYIDgYMCAkNDgIOBAcMAA"
+				},
+				{
+					"id": -1,
+					"name": "Cart",
+					"pathName": "pages/cart/cart",
+					"query": ""
 				}
 			]
 		}

@@ -8,6 +8,10 @@ Page({
    */
   data: {
     cart:[],
+    totalPrice: 0,
+    totalPriceStr: "",
+    placeholderHeight: 12,
+    disabled: true
   },
   globalMsgLoad: function (e) {
     const imgWidth = e.detail.width
@@ -29,29 +33,87 @@ Page({
       placeholderHeight: this.data.placeholderHeight + viewHeight,
     })
   },
+  navIconLoad: function(e) {
+    const viewHeight = app.topNavHeight;
+    const iconWidth = app.topNavHeight(e);
+    console.log(iconWidth)
+    this.setData({
+      placeholderHeight: this.data.placeholderHeight + viewHeight
+    })
+  },
+  deleteItem: function (e) {
+    let cart = this.data.cart;
+    const totalPrice = this.data.totalPrice;
+    let disabled = this.data.disabled;
+    let id = e.currentTarget.id;
+    let itemPrice = 0;
+    cart.forEach((item, index, array) => {
+      if (item.productId === id) {
+        itemPrice = item.productInfo.salePrice * item.quantity;
+        array.splice(index, 1);
+        let updatedPrice = totalPrice - itemPrice
+        let currency = item.productInfo.currency ? item.productInfo.currency : app.globalData.defaultCurrency
+        this.setData({
+          cart: cart,
+          disabled: cart.length === 0 || updatedPrice === 0 ? true : false,
+          totalPrice: updatedPrice,
+          totalPriceStr: currency + updatedPrice
+        })
+      }
+    })
+    wx.setStorageSync('cart', cart)
+    wx.showToast({
+      title: '商品已移除',
+      duration: 1500
+    })
+  },
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.setNavigationBarTitle({
+      title: '购物袋'
+    })
+
     const page = this;
-    let cart = [];
-    wx.getStorageSync('cart').forEach((item) => {
-      wx.request({
-        method: 'GET',
-        url: app.globalData.apiBaseUrl + '/v1/products/' + item.productId,
-        header: {
-          'content-type': 'application/json'
-        },
-        success: (res) => {
-          item.productInfo = res.data;
-          cart.push(item);
-          this.setData({
-            cart: cart
-          });
-        }
+    let storedCart = wx.getStorageSync('cart');
+    if (storedCart.length > 0) {
+      this.setData({
+        disabled: false
       })
-    });
+      let cart = [];
+      storedCart.forEach((item) => {
+        wx.request({
+          method: 'GET',
+          url: app.globalData.apiBaseUrl + '/v1/products/' + item.productId,
+          header: {
+            'content-type': 'application/json'
+          },
+          success: (res) => {
+            let product = res.data
+            const { price, salePrice } = product
+            let currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
+            let salePriceStr = currencyStr + product.salePrice;
+            let priceStr = "";
+            if (price > salePrice) {
+              priceStr = currencyStr + price;
+            }
+            product['priceStr'] = priceStr
+            product['salePriceStr'] = salePriceStr
+            item.productInfo = product;
+            cart.push(item);
+            let currency = product.currency ? product.currency : app.globalData.defaultCurrency
+            let totalPrice = page.data.totalPrice + item.productInfo.salePrice * item.quantity
+            this.setData({
+              cart: cart,
+              totalPrice: totalPrice,
+              totalPriceStr: currency + totalPrice
+            });
+          }
+        })
+      });
+    }
 
     wx.request({
       method: 'GET',

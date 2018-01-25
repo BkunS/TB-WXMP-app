@@ -39,6 +39,37 @@
   right: 0;
 }
 
+.topNavBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20rpx 20rpx;
+  background-color: white;
+}
+
+.icon-view {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+}
+
+.align-start {
+  align-items: flex-start
+}
+
+.align-end {
+  align-items: flex-end
+}
+
+.logo-image {
+
+}
+
+.icon-image {
+  height: 100%;
+  padding: 0 20rpx;
+}
+
 .topNav-view {
   display: flex;
   flex-direction: column;

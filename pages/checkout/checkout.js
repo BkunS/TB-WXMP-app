@@ -1,4 +1,4 @@
-// pages/category/category.js
+// pages/cart/cart.js
 const app = getApp();
 
 Page({
@@ -7,9 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    pageContents: {},
-    category: {},
+    cart: [],
+    totalPrice: 0,
     placeholderHeight: 12,
+    disabled: true
   },
   globalMsgLoad: function (e) {
     const imgWidth = e.detail.width
@@ -36,29 +37,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const page = this;
-    wx.request({
-      method: 'GET',
-      url: app.globalData.apiBaseUrl + '/v1/contents/categories/' + options.id,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        page.setData({
-          pageContents: res.data
-        })
-      }
+    wx.setNavigationBarTitle({
+      title: '结算'
     })
-    wx.request({
-      method: 'GET',
-      url: app.globalData.apiBaseUrl + '/v1/categories/' + options.id,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        let category = res.data
-        let { masterProducts } = category;
-        masterProducts.map((product) => {
+
+    const page = this;
+    let storedCart = wx.getStorageSync('cart');
+    if (storedCart.length > 0) {
+      this.setData({
+        disabled: false
+      })
+    }
+    let cart = [];
+    storedCart.forEach((item) => {
+      wx.request({
+        method: 'GET',
+        url: app.globalData.apiBaseUrl + '/v1/products/' + item.productId,
+        header: {
+          'content-type': 'application/json'
+        },
+        success: (res) => {
+          let product = res.data
           const { price, salePrice } = product
           let currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
           let salePriceStr = currencyStr + product.salePrice;
@@ -68,15 +67,29 @@ Page({
           }
           product['priceStr'] = priceStr
           product['salePriceStr'] = salePriceStr
-          return product;
-        })
-        category.masterProducts = masterProducts
+          item.productInfo = product;
+          cart.push(item);
+          let currency = product.currency ? product.currency : app.globalData.defaultCurrency
+          let totalPrice = page.data.totalPrice + item.productInfo.salePrice * item.quantity
+          this.setData({
+            cart: cart,
+            totalPrice: totalPrice,
+            totalPriceStr: currency + totalPrice
+          });
+        }
+      })
+    });
+
+    wx.request({
+      method: 'GET',
+      url: app.globalData.apiBaseUrl + '/v1/contents/checkout',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: (res) => {
         page.setData({
-          category: category
-        })
-        wx.setNavigationBarTitle({
-          title: category.displayName
-        })
+          pageContents: res.data
+        });
       }
     })
   },
@@ -85,48 +98,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

@@ -10,6 +10,22 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        this.globalData.openId = res.code;
+        const app = this;
+        wx.request({
+          method: 'POST',
+          url: app.globalData.apiBaseUrl + '/v1/auth',
+          header: {
+            'content-type': 'application/json'
+          },
+          body: {
+            'openId': app.globalData.openId
+          },
+          success: (res) => {
+            console.log(res)
+            app.globalData.accessToken = res.data.access_token
+          }
+        })
       }
     })
     // 获取用户信息
@@ -33,8 +49,27 @@ App({
       }
     })
   },
+  navIconLoad: function(e) {
+    const imgHeight = e.detail.height
+    const imgWidth = e.detail.width
+    const ratio = imgWidth / imgHeight
+    let viewHeight = 0;
+    if (e.currentTarget.id === "logoWidth") {
+      viewHeight = this.globalData.defaultLogoHeight;
+    } else {
+      viewHeight = this.globalData.defaultIconHeight;
+    }
+    return ratio * imgHeight * this.globalData.iconZoom;
+  },
   globalData: {
     userInfo: null,
+    openId: "",
+    accessToken: "",
+    defaultCurrency: "￥",
+    defaultIconHeight: 25,
+    defaultLogoHeight: 30,
+    topNavHeight: 60,
+    iconZoom: 0.6,
     apiBaseUrl: 'http://localhost:10010'
   }
 })

@@ -1,21 +1,37 @@
 /**index.wxss**/
+.lookbook-item-view {
+  text-align: center;
+  padding-bottom: 10rpx;
+}
+
+.lookbook-title-view {
+  margin-top: 15rpx;
+  margin-bottom: 20rpx;
+  font-size: 35rpx;
+  font-weight: 500;
+  color: #0c2340;
+  font-family: noto_sans_sc_regular;
+}
+
 .lookbook-text-view {
-  top: 30%; 
-  left: 20%;
-  position: absolute;
-  color: white;
-  font-family: noto_sans_sc_regular;
-}
-
-.heroText-view {
-  padding: 15rpx 50rpx; 
-  text-align: center; 
-  margin-bottom: 50rpx;
-}
-
-.heroText-font {
+  margin-top: 20rpx;
+  margin-bottom: 25rpx;
   font-size: 30rpx;
-  font-family: noto_sans_sc_regular;
+  color: #0c2340;
+}
+
+.lookbook-button-view {
+  width: 50%;
+  margin: auto;
+}
+
+.lookbook-checkout-button {
+  color: #0c2340;
+}
+
+.button-hover {
+  color: grey;
+  background-color: black;
 }
 
 .categoryText-font {
@@ -45,4 +61,15 @@
   margin-top: 70rpx;
   margin-bottom: 30rpx;
   text-align: center;
+}
+
+.heroText-view {
+  padding: 15rpx 50rpx; 
+  text-align: center; 
+  margin-bottom: 50rpx;
+}
+
+.heroText-font {
+  font-size: 30rpx;
+  font-family: noto_sans_sc_regular;
 }

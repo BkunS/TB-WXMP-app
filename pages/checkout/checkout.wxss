@@ -16,7 +16,7 @@
 
 .item-img-view {
   display: inline-block;
-  width: 40%;
+  width: 25%;
   margin: auto;
 }
 
@@ -27,18 +27,18 @@
 
 .item-info-view {
   display: inline-block;
-  width: 60%;
+  width: 75%;
   padding-left: 30rpx;
 }
 
 .item-name-font {
-  font-size: 30rpx;
-  font-weight: 600;
+  font-size: 25rpx;
+  font-weight: 500;
 }
 
 .item-property-view {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .price-property-view {
@@ -47,21 +47,12 @@
   flex-direction:column;
 }
 
-.align-center {
-  text-align: center;
-}
-
 .item-property-font {
   font-size: 20rpx
 }
 
-.delete-font {
-  font-size: 25rpx;
-  text-decoration: underline;
-}
-
 .price-font {
-  font-size: 30rpx;
+  font-size: 25rpx;
 }
 
 .docker-title-view {
@@ -99,7 +90,11 @@
   margin: 30rpx 0;
 }
 
-.checkout-button {
+.pay-now-button {
   color: white; 
-  background-color: #0c2340;
+  background-color: #44b549;
+}
+
+.pay-later-button {
+  color: #44b549;
 }

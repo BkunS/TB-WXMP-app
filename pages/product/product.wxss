@@ -33,11 +33,11 @@
 
 .picker-view {
   margin: 0 30rpx;
-  height: 60rpx;
   font-size: 30rpx;
-  padding: 10rpx 30rpx;
+  padding: 20rpx 30rpx;
   border:3rpx solid grey;
   text-align: center;
+  vertical-align: middle;
 }
 
 .button-view {

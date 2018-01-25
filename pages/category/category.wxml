@@ -25,8 +25,8 @@
           <image src="{{item.image}}" class="product-item-image" mode="widthFix"></image>
           <view class="nameTag-view">
             <text class="default-font productText-font"> {{item.displayName}}\n </text>
-            <text class="default-font price-font textLineThrough"> {{item.price}} </text>
-            <text class="default-font price-font"> {{item.salePrice}} </text>
+            <text class="default-font price-font textLineThrough"> {{item.priceStr}} </text>
+            <text class="default-font price-font"> {{item.salePriceStr}} </text>
           </view>
         </navigator>
       </view>

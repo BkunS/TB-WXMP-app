@@ -1,2 +1,26 @@
 <!--pages/blog/blog.wxml-->
-<text>pages/blog/blog.wxml</text>
+<view class="default-view">
+  <view class="topNav-view">
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" bindload="globalMsgLoad"></image>
+    <view class="topNavBar" style="height:{{topNavHeight}}rpx;">
+      <view class="icon-view align-start">
+        <image src="../../assets/hamburger.png" mode="aspectFit" id="hamburgerWidth" class="icon-image align-start" bindload="iconLoad" style="width: {{hamburgerWidth}}rpx"></image>
+        <image src="../../assets/search.png" mode="aspectFit" id="searchWidth" class="icon-image align-start" bindload="iconLoad" style="width: {{searchWidth}}rpx"></image>
+      </view>
+      <view class="icon-view" style="text-align: center;">
+        <navigator url="/pages/index/index" open-type="switchTab" class="icon-image" style="height: 100%">
+          <image src="../../assets/logo.png" mode="aspectFit" id="logoWidth" class="icon-image" bindload="iconLoad" style="width: {{logoWidth}}rpx"></image>
+        </navigator>
+      </view>
+      <view class="icon-view align-end">
+        <image src="../../assets/heart.png" mode="aspectFit" id="heartWidth" class="icon-image align-end" bindload="iconLoad" style="width: {{heartWidth}}rpx"></image>
+        <navigator url="/pages/cart/cart" class="align-end" style="height: 100%">
+          <image src="../../assets/bag.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
+  </view>
+
+</view>

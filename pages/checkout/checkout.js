@@ -9,7 +9,12 @@ Page({
   data: {
     cart: [],
     totalPrice: 0,
-    placeholderHeight: 12,
+    topNavHeight: 0,
+    placeholderHeight: 40,
+    hambugerWidth: 0,
+    searchWidth: 0,
+    logoWidth: 0,
+    heartWidth: 0,
     disabled: true
   },
   globalMsgLoad: function (e) {
@@ -22,14 +27,11 @@ Page({
       placeholderHeight: this.data.placeholderHeight + viewHeight,
     })
   },
-  topNavLoad: function (e) {
-    const imgWidth = e.detail.width
-    const imgHeight = e.detail.height
-    const ratio = imgWidth / imgHeight;
-    const viewWidth = 750;
-    const viewHeight = 750 / ratio;
+  iconLoad: function (e) {
+    const iconWidth = app.navIconLoad(e)
+    const id = e.currentTarget.id;
     this.setData({
-      placeholderHeight: this.data.placeholderHeight + viewHeight,
+      [id]: iconWidth,
     })
   },
 
@@ -42,6 +44,12 @@ Page({
     })
 
     const page = this;
+    const topNavHeight = app.globalData.topNavHeight
+    this.setData({
+      topNavHeight: topNavHeight,
+      placeholderHeight: this.data.placeholderHeight + topNavHeight,
+    })
+
     let storedCart = wx.getStorageSync('cart');
     if (storedCart.length > 0) {
       this.setData({

@@ -15,7 +15,8 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "ToryBurch",
     "navigationBarTextStyle":"black",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "selectedColor": "#0d243f",
@@ -23,21 +24,15 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "text": "首页"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "text": "潮流资讯",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "pagePath": "pages/blog/blog",
+        "text": "潮流资讯"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "text": "我的"
       }
     ]
   }

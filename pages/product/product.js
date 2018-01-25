@@ -17,7 +17,12 @@ Page({
     selectedId: "",
     current: 0,
     imgHeights: [],
-    placeholderHeight: 12,
+    topNavHeight: 0,
+    placeholderHeight: 40,
+    hambugerWidth: 0,
+    searchWidth: 0,
+    logoWidth: 0,
+    heartWidth: 0,
     indicatorDots: true,
     autoplay: false,
     interval: 5000,
@@ -37,14 +42,11 @@ Page({
       placeholderHeight: this.data.placeholderHeight + viewHeight,
     })
   },
-  topNavLoad: function (e) {
-    const imgWidth = e.detail.width
-    const imgHeight = e.detail.height
-    const ratio = imgWidth / imgHeight;
-    const viewWidth = 750;
-    const viewHeight = 750 / ratio;
+  iconLoad: function (e) {
+    const iconWidth = app.navIconLoad(e)
+    const id = e.currentTarget.id;
     this.setData({
-      placeholderHeight: this.data.placeholderHeight + viewHeight,
+      [id]: iconWidth,
     })
   },
   imageLoad: function (e) {
@@ -129,6 +131,7 @@ Page({
   addToCart: function(e) {
     const page = this;
     let cart = wx.getStorageSync('cart');
+    cart = cart ? cart : [];
     const productId = page.data.selectedId
     let hasProduct = false;
     cart.forEach((item, index) => {
@@ -162,7 +165,12 @@ Page({
    */
   onLoad: function (options) {
     const page = this;
-
+    const topNavHeight = app.globalData.topNavHeight
+    this.setData({
+      topNavHeight: topNavHeight,
+      placeholderHeight: this.data.placeholderHeight + topNavHeight,
+    })
+    
     wx.request({
       method: 'GET',
       url: app.globalData.apiBaseUrl + '/v1/contents/pdp',
@@ -214,6 +222,7 @@ Page({
         wx.setNavigationBarTitle({
           title: product.displayName
         })
+        console.log(page.data.product);
         page.radioLoad();
       }
     })
@@ -265,6 +274,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    return {
+      title: 'ToryBurch · ' + this.data.product.displayName,
+      desc: '',
+      path: '/page/product/product?id=' + this.data.selectedId
+    }  
   }
 })

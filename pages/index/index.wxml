@@ -8,7 +8,7 @@
         <image src="../../assets/search.png" mode="aspectFit" id="searchWidth" class="icon-image align-start" bindload="iconLoad" style="width: {{searchWidth}}rpx"></image>
       </view>
       <view class="icon-view" style="text-align: center">
-        <navigator url="/pages/index/index" class="icon-image">
+        <navigator url="/pages/index/index" open-type="switchTab" class="icon-image">
           <image src="../../assets/logo.png" mode="aspectFit" id="logoWidth" class="icon-image" bindload="iconLoad" style="width: {{logoWidth}}rpx"></image>
         </navigator>
       </view>

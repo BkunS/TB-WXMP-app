@@ -8,7 +8,7 @@ Page({
     lookbooks: [],
     categories:[],
     topNavHeight: 0,
-    placeholderHeight: 20,
+    placeholderHeight: 40,
     hambugerWidth: 0,
     searchWidth: 0,
     logoWidth: 0,

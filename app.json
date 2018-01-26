@@ -15,8 +15,8 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "ToryBurch",
     "navigationBarTextStyle":"black",
-    "enablePullDownRefresh": true,
-    "navigationStyle": "custom"
+    "enablePullDownRefresh": false,
+    "navigationStyle": "default"
   },
   "tabBar": {
     "selectedColor": "#0d243f",

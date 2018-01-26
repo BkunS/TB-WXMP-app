@@ -10,6 +10,7 @@ Page({
     cart:[],
     totalPrice: 0,
     totalPriceStr: "", 
+    bagEmpty: true,
     topNavHeight: 0,
     placeholderHeight: 40,
     hambugerWidth: 0,
@@ -63,6 +64,9 @@ Page({
         })
       }
     })
+    this.setData({
+      bagEmpty: cart.length > 0 ? false : true
+    })
     wx.setStorageSync('cart', cart)
     wx.showToast({
       title: '商品已移除',
@@ -77,12 +81,28 @@ Page({
     wx.setNavigationBarTitle({
       title: '购物袋'
     })
+    wx.showNavigationBarLoading();
 
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
     this.setData({
       topNavHeight: topNavHeight,
       placeholderHeight: this.data.placeholderHeight + topNavHeight,
+    })
+
+    wx.getStorage({
+      key: 'cart',
+      success: function (res) {
+        if (res.data.length > 0) {
+          page.setData({
+            bagEmpty: false
+          })
+        } else {
+          page.setData({
+            bagEmpty: true
+          })
+        }
+      }
     })
 
     let storedCart = wx.getStorageSync('cart');
@@ -141,14 +161,22 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    wx.hideNavigationBarLoading()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    const page = this;
+    wx.getStorage({
+      key: 'cart',
+      success: function (res) {
+        page.setData({
+          bagEmpty: res.data.length > 0 ? false : true
+        })
+      }
+    })
   },
 
   /**

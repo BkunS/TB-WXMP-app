@@ -9,6 +9,7 @@ Page({
   data: {
     pageContents: {},
     category: {},
+    bagEmpty: true,
     topNavHeight: 0,
     placeholderHeight: 40,
     hambugerWidth: 0,
@@ -38,6 +39,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showNavigationBarLoading()
+
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
     this.setData({
@@ -87,9 +90,6 @@ Page({
         page.setData({
           category: category
         })
-        wx.setNavigationBarTitle({
-          title: category.displayName
-        })
       }
     })
   },
@@ -98,14 +98,22 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    wx.hideNavigationBarLoading()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    const page = this;
+    wx.getStorage({
+      key: 'cart',
+      success: function (res) {
+        page.setData({
+          bagEmpty: res.data.length > 0 ? false : true
+        })
+      }
+    })
   },
 
   /**

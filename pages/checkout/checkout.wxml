@@ -16,7 +16,8 @@
       <view class="icon-view align-end">
         <image src="../../assets/heart.png" mode="aspectFit" id="heartWidth" class="icon-image align-end" bindload="iconLoad" style="width: {{heartWidth}}rpx"></image>
         <navigator url="/pages/cart/cart" class="align-end" style="height: 100%">
-          <image src="../../assets/bag.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
+          <image wx:if="{{bagEmpty}}" src="../../assets/bag.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
+          <image wx:else src="../../assets/bag-full.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
         </navigator>
       </view>
     </view>
@@ -56,7 +57,27 @@
       </view>
     </view>
 
-    <view style="margin: 0rpx 0; padding: 0rpx 0">
+    <view style="margin: 40rpx 0; padding: 0rpx 0"> 
+       <view class="shipping-title-view">
+        <view class="docker-title-view">收货地址： </view>
+        <button bindtap="chooseAddressTap" size="mini" class="docker-title-view" style="margin-left: 0; margin-right: 0"> 选择地址 </button>
+       </view>
+      <view class="line"></view>
+      <view wx:if="{{isShippingSet}}">
+        <view class="docker-detail-item-view"> 
+          收件人：{{shippingName}}，手机：{{shippingTel}}
+        </view>
+        <view class="docker-detail-item-view"> 
+          地址：{{shippingAddres}}
+        </view>
+        <view class="docker-detail-item-view"> 
+          邮编：{{shippingPostal}}
+        </view>
+      </view>
+      <view wx:else style="text-align: center" class="docker-detail-item-view"> 请选择地址 </view>
+    </view>
+
+    <view style="margin: 40rpx 0; padding: 0rpx 0">
       <view class="docker-title-view"> 订单小计 </view>
       <view class="line"></view>
       <view class="docker-detail-view"> 
@@ -72,8 +93,8 @@
         </view>
       </view>
       <view class="line"></view>
-      <button disabled="{{disabled}}" class="button pay-now-button" hover-class="button-hover">微信支付</button>
-      <button disabled="{{disabled}}" class="button pay-later-button" hover-class="button-hover">货到付款</button>
+      <button disabled="{{disabled}}" class="button pay-now-button" hover-class="button-hover" bindtap='wxPayTap'>微信支付</button>
+      <button disabled="{{disabled}}" class="button pay-later-button" hover-class="button-hover" bindtap="payLaterTap">货到付款</button>
     </view>
   </view>
   <view class="default-view">

@@ -14,7 +14,7 @@ App({
         const app = this;
         wx.request({
           method: 'POST',
-          url: app.globalData.apiBaseUrl + '/v1/auth',
+          url: app.globalData.apiBaseUrl + '/v1/auth/accessToken',
           header: {
             'content-type': 'application/json'
           },
@@ -61,7 +61,33 @@ App({
     }
     return ratio * imgHeight * this.globalData.iconZoom;
   },
+  wxAuthorize: function(authType) {
+    const app = this;
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting[`scope.${authType}`]) {
+          wx.authorize({
+            scope: `scope.${authType}`,
+            success() {
+              console.log('success')
+              app.globalData[authType + 'Authed'] = true;
+            },
+            fail() {
+              console.log('fail')
+              app.globalData[authType + 'Authed'] = false;
+            }
+          })
+        } else {
+          app.globalData[authType + 'Authed'] = true;
+        }
+      }
+    })
+  },
   globalData: {
+    userInfoAuthed: false,
+    userLocationAuthed: false,
+    addressAuthed: false,
+    invoiceTitleAuthed: false,
     userInfo: null,
     openId: "",
     accessToken: "",
@@ -70,6 +96,6 @@ App({
     defaultLogoHeight: 30,
     topNavHeight: 60,
     iconZoom: 0.6,
-    apiBaseUrl: 'http://localhost:10010'
+    apiBaseUrl: 'https://digital-innovation-180520.appspot.com' //'http://localhost:10010'
   }
 })

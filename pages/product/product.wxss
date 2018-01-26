@@ -42,7 +42,7 @@
 
 .button-view {
   margin: 30rpx 0;
-  padding: 0 40rpx;
+  padding: 0 30rpx;
 }
 
 .button {
@@ -61,4 +61,20 @@
 .button-hover {
   color: grey;
   background-color: black;
+}
+
+.description-title-view {
+  font-size: 35rpx;
+  font-weight: 600;
+  padding: 30rpx 0;
+}
+
+.description-text-view {
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.description-list-view {
+  font-size: 28rpx;
+  margin: 10rpx 0;
 }

@@ -16,7 +16,8 @@
       <view class="icon-view align-end">
         <image src="../../assets/heart.png" mode="aspectFit" id="heartWidth" class="icon-image align-end" bindload="iconLoad" style="width: {{heartWidth}}rpx"></image>
         <navigator url="/pages/cart/cart" class="align-end" style="height: 100%">
-          <image src="../../assets/bag.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
+          <image wx:if="{{bagEmpty}}" src="../../assets/bag.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
+          <image wx:else src="../../assets/bag-full.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
         </navigator>
       </view>
     </view>
@@ -54,7 +55,7 @@
       </label>
     </radio-group>
   </view>
-  <view class="default-view">
+  <view class="default-view" style="margin-top: 25rpx">
     <picker value="{{selectedSizes[selectedSizeIndex].id}}" range="{{selectedSizes}}" range-key="{{'size'}}" bindchange="pickerSelected"> 
       <view class="picker-view"> <view style="margin: auto">选择尺码：{{selectedSize}}</view> </view>
     </picker>
@@ -63,5 +64,23 @@
   <view class="button-view">
     <button disabled="{{disabled}}" loading="{{buttonLoading}}" class="button addToCart-button" bindtap="addToCart" hover-class="button-hover">{{addToCartBTText}}</button> 
     <button disabled="{{disabled}}" loading="{{buttonLoading}}" class="button buyNow-button" bindtap="buyNow" hover-class="button-hover" plain>{{buyNowBTText}}</button> 
+  </view>
+  
+  <view class="button-view">
+    <view class="description-title-view"> 产品描述：</view>
+    <view class="description-text-view"> {{product.description}} </view>
+    <view wx:for="{{product.descriptionList}}" wx:key="{{index}}" class="description-list-view">
+      <view> {{item}} </view>
+    </view>
+  </view>
+
+  <view class="button-view">
+    <view class="description-title-view"> 寄送方式：</view>
+    <view class="description-text-view"> 免运费，退货包邮 </view>
+    <view class="description-list-view"> 2天内送货上门 </view>
+  </view>
+
+  <view class="default-view">
+    <image src="../../assets/email.png" mode="widthFix" class="default-image"></image>
   </view>
 </view>

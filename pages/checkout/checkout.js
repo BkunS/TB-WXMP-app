@@ -8,7 +8,13 @@ Page({
    */
   data: {
     cart: [],
+    isShippingSet: false, 
+    shippingName: '',
+    shippingTel: '',
+    shippingAddres: '',
+    shippingPostal: '',
     totalPrice: 0,
+    bagEmpty: true,
     topNavHeight: 0,
     placeholderHeight: 40,
     hambugerWidth: 0,
@@ -34,6 +40,66 @@ Page({
       [id]: iconWidth,
     })
   },
+  chooseAddressTap: function(e) {
+    const page = this;
+    if (!app.addressAuthed) {
+      app.wxAuthorize('address');
+    }
+    wx.chooseAddress({
+      success: function (res) {
+        page.setData({
+          shippingName: res.userName,
+          shippingTel: res.telNumber,
+          shippingAddres: `${res.detailInfo}，${res.cityName}, ${res.provinceName}，${res.countyName}`,
+          shippingPostal: res.postalCode,
+          isShippingSet: true
+        })
+      }
+    })
+  },
+  wxPayTap: function (e) {
+    const page = this;
+
+    wx.showToast({
+      title: '微信支付',
+      icon: 'loading',
+      mask: true,
+      image: '/assets/wxPayLogo.png',
+      duration: 2000,
+      complete: function() {
+        setTimeout(function () {
+          wx.showModal({
+            title: '数额：￥' + page.data.totalPrice,
+            content: '收款：ToryBurch',
+            confirmText: '支付'
+          })
+        }, 2500)
+      }
+    })
+  },
+  payLaterTap: function(e) {
+    const authTypes = ['userInfo']
+    console.log(authTypes)
+    //authTypes.forEach((authType) => {
+      app.wxAuthorize(authTypes[0]);
+    //})
+    /*
+    wx.requestPayment({
+      'timeStamp': (new Date().getTime() / 1000 | 0) + '',
+      'nonceStr': 'aksjdaskjdhaskjd',
+      'package': '',
+      'signType': 'MD5',
+      'paySign': '',
+      'success': function (res) {
+        console.log('Success')
+      },
+      'fail': function (res) {
+        console.log('Fail')
+      }
+    })
+    */
+    
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -42,6 +108,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '结算'
     })
+    wx.showNavigationBarLoading()
 
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
@@ -106,14 +173,22 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    wx.hideNavigationBarLoading()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const page = this;
+    wx.getStorage({
+      key: 'cart',
+      success: function (res) {
+        page.setData({
+          bagEmpty: res.data.length > 0 ? false : true
+        })
+      }
+    })
   },
 
   /**

@@ -9,6 +9,7 @@ Page({
   data: {
     pageContents: {},
     blogs: [],
+    bagEmpty: true,
     topNavHeight: 0,
     placeholderHeight: 40,
     hambugerWidth: 0,
@@ -41,6 +42,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '资讯',
     })
+    wx.showNavigationBarLoading()
 
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
@@ -54,14 +56,22 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    wx.hideNavigationBarLoading()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    const page = this;
+    wx.getStorage({
+      key: 'cart',
+      success: function (res) {
+        page.setData({
+          bagEmpty: res.data.length > 0 ? false : true
+        })
+      }
+    })
   },
 
   /**

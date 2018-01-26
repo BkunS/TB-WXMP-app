@@ -7,6 +7,7 @@ Page({
     pageContents: {},
     lookbooks: [],
     categories:[],
+    bagEmpty: true,
     topNavHeight: 0,
     placeholderHeight: 40,
     hambugerWidth: 0,
@@ -36,6 +37,7 @@ Page({
   },
 
   onLoad: function () {
+    wx.showNavigationBarLoading();
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
     this.setData({
@@ -81,5 +83,68 @@ Page({
         })
       }
     })
+    wx.stopPullDownRefresh()
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    wx.hideNavigationBarLoading()
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    const page = this;
+    wx.getStorage({
+      key: 'cart',
+      success: function (res) {
+        page.setData({
+          bagEmpty: res.data.length > 0 ? false : true
+        })
+      }
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading()
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    return {
+      title: 'ToryBurch 官方',
+      desc: '',
+      path: '/page/index/index'
+    }
   }
 })

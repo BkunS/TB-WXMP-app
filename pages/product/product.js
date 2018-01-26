@@ -9,6 +9,7 @@ Page({
   data: {
     pageContents: {},
     product: {},
+    bagEmpty: true,
     selectedColorIndex: 0,
     selectedColorName: "",
     selectedSizes: [],
@@ -146,6 +147,11 @@ Page({
         quantity: 1
       })
     }
+    if (cart.length > 0) {
+      this.setData({
+        bagEmpty: false
+      })
+    }
     wx.setStorageSync('cart', cart);
     wx.showToast({
       title: '商品已添加',
@@ -164,6 +170,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showNavigationBarLoading()
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
     this.setData({
@@ -192,6 +199,9 @@ Page({
       },
       success: (res) => {
         let product = res.data;
+        wx.setNavigationBarTitle({
+          title: product.displayName
+        })
         const currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
         const priceRange = product.priceRange;
         const salePriceRange = product.salePriceRange;
@@ -208,6 +218,11 @@ Page({
           priceStr = currencyStr + priceRange[0] + '-' + currencyStr + priceRange[1]
         }
 
+        let { descriptionList } = product;
+        descriptionList = descriptionList.map((value) => {
+          return ' - ' + value;
+        })
+        product['descriptionList'] = descriptionList;
         product['salePriceStr'] = salePriceStr;
         product['priceStr'] = priceStr;
         const selectedColorIndex = 0;
@@ -219,10 +234,6 @@ Page({
           selectedSizes: product.variations[selectedColorIndex].sizes,
           selectedColorName: product.variations[selectedColorIndex].colorName
         });
-        wx.setNavigationBarTitle({
-          title: product.displayName
-        })
-        console.log(page.data.product);
         page.radioLoad();
       }
     })
@@ -232,14 +243,22 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    wx.hideNavigationBarLoading()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    const page = this;
+    wx.getStorage({
+      key: 'cart',
+      success: function (res) {
+        page.setData({
+          bagEmpty: res.data.length > 0 ? false : true
+        })
+      }
+    })
   },
 
   /**
@@ -260,7 +279,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    wx.showNavigationBarLoading()
   },
 
   /**
@@ -275,7 +294,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: 'ToryBurch · ' + this.data.product.displayName,
+      title: 'ToryBurch - ' + this.data.product.displayName,
       desc: '',
       path: '/page/product/product?id=' + this.data.selectedId
     }  

@@ -88,6 +88,13 @@
   margin: 30rpx 0;
 }
 
+.choose-addr-button {
+  margin-left: 0; 
+  margin-right: 0; 
+  color: white; 
+  background-color: #0c2340
+}
+
 .pay-now-button {
   color: white; 
   background-color: #44b549;

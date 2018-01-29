@@ -131,32 +131,48 @@ Page({
   }, 
   addToCart: function(e) {
     const page = this;
-    let cart = wx.getStorageSync('cart');
-    cart = cart ? cart : [];
-    const productId = page.data.selectedId
-    let hasProduct = false;
-    cart.forEach((item, index) => {
-      if (item.productId === productId) {
-        item.quantity++;
-        hasProduct = true;
-      }
-    })
-    if (hasProduct === false) {
-      cart.push({
-        productId: productId,
-        quantity: 1
-      })
-    }
-    if (cart.length > 0) {
-      this.setData({
-        bagEmpty: false
-      })
-    }
-    wx.setStorageSync('cart', cart);
-    wx.showToast({
-      title: '商品已添加',
-      icon: 'success',
-      duration: 2000
+    wx.getStorage({
+      key: 'cart',
+      success: function(res) {
+        let cart = res.data ? res.data : [];
+        const productId = page.data.selectedId
+        let hasProduct = false;
+        cart.forEach((item, index) => {
+          if (item.productId === productId) {
+            item.quantity++;
+            hasProduct = true;
+          }
+        })
+        if (hasProduct === false) {
+          cart.push({
+            productId: productId,
+            quantity: 1
+          })
+        }
+        if (cart.length > 0) {
+          page.setData({
+            bagEmpty: false
+          })
+        }
+        wx.setStorage({
+          key: 'cart',
+          data: cart,
+          success: function() {
+            wx.showToast({
+              title: '商品已添加',
+              icon: 'success',
+              duration: 2000
+            })
+          },
+          fail: function() {
+            wx.showToast({
+              title: '添加失败，请重试',
+              icon: 'fail',
+              duration: 2500
+            })
+          }
+        })
+      },
     })
   },
   buyNow: function (e) {

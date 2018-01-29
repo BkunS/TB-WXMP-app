@@ -60,7 +60,8 @@
     <view style="margin: 40rpx 0; padding: 0rpx 0"> 
        <view class="shipping-title-view">
         <view class="docker-title-view">收货地址： </view>
-        <button bindtap="chooseAddressTap" size="mini" class="docker-title-view" style="margin-left: 0; margin-right: 0"> 选择地址 </button>
+        <button bindtap="chooseAddressTap" size="mini" class="docker-title-view" hover-class="button-hover" 
+          style="margin-left: 0; margin-right: 0; color: white; background-color: #0c2340"> 选择地址 </button>
        </view>
       <view class="line"></view>
       <view wx:if="{{isShippingSet}}">
@@ -68,13 +69,13 @@
           收件人：{{shippingName}}，手机：{{shippingTel}}
         </view>
         <view class="docker-detail-item-view"> 
-          地址：{{shippingAddres}}
+          地址：{{shippingAddress}}
         </view>
         <view class="docker-detail-item-view"> 
           邮编：{{shippingPostal}}
         </view>
       </view>
-      <view wx:else style="text-align: center" class="docker-detail-item-view"> 请选择地址 </view>
+      <view wx:else style="text-align: center; color: red" class="docker-detail-item-view"> 请选择地址 </view>
     </view>
 
     <view style="margin: 40rpx 0; padding: 0rpx 0">

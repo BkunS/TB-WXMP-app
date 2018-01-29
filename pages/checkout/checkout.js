@@ -11,8 +11,9 @@ Page({
     isShippingSet: false, 
     shippingName: '',
     shippingTel: '',
-    shippingAddres: '',
+    shippingAddress: '',
     shippingPostal: '',
+    shippingPrice: 0,
     totalPrice: 0,
     bagEmpty: true,
     topNavHeight: 0,
@@ -42,47 +43,74 @@ Page({
   },
   chooseAddressTap: function(e) {
     const page = this;
-    if (!app.addressAuthed) {
-      app.wxAuthorize('address');
-    }
-    wx.chooseAddress({
-      success: function (res) {
-        page.setData({
-          shippingName: res.userName,
-          shippingTel: res.telNumber,
-          shippingAddres: `${res.detailInfo}，${res.cityName}, ${res.provinceName}，${res.countyName}`,
-          shippingPostal: res.postalCode,
-          isShippingSet: true
-        })
-      }
-    })
+    app.wxAuthorize('address', () => {
+      wx.chooseAddress({
+        success: function (res) {
+          const disabled = page.data.cart.length > 0 ? false : true;
+          page.setData({
+            shippingName: res.userName,
+            shippingTel: res.telNumber,
+            shippingAddress: `${res.detailInfo}，${res.cityName}, ${res.provinceName}，${res.countyName}`,
+            shippingPostal: res.postalCode,
+            isShippingSet: true,
+            disabled: disabled
+          })
+        }
+      })
+    });
   },
   wxPayTap: function (e) {
     const page = this;
-
     wx.showToast({
       title: '微信支付',
       icon: 'loading',
       mask: true,
       image: '/assets/wxPayLogo.png',
-      duration: 2000,
+      duration: 800,
       complete: function() {
-        setTimeout(function () {
-          wx.showModal({
-            title: '数额：￥' + page.data.totalPrice,
-            content: '收款：ToryBurch',
-            confirmText: '支付'
+        setTimeout(() => {
+          wx.showLoading({
+            title: '授权中',
+            complete: () => {
+              setTimeout(() => {
+                wx.hideLoading()
+                wx.showModal({
+                  title: '数额：￥' + page.data.totalPrice,
+                  content: '收款方：ToryBurch',
+                  confirmText: '支付',
+                  success: (res) => {
+                    if (res.confirm) {
+                      wx.showLoading({
+                        title: '订单提交中',
+                      });
+                      app.getUserInfo(() => {
+                        page.submitOrder({
+                          'type': 'WeChatPay'
+                        });
+                      })
+                    } else if (res.cancel) {
+                      console.log('用户点击取消')
+                    }
+                  }
+                })
+              }, 1800)
+            }
           })
-        }, 2500)
+        }, 800)
       }
     })
   },
   payLaterTap: function(e) {
-    const authTypes = ['userInfo']
-    console.log(authTypes)
-    //authTypes.forEach((authType) => {
-      app.wxAuthorize(authTypes[0]);
-    //})
+    const page = this;
+    wx.showLoading({
+      title: '订单提交中',
+    });
+    app.getUserInfo(() => {
+      page.submitOrder({
+        'type': 'payUponDelivery'
+      });
+    })
+
     /*
     wx.requestPayment({
       'timeStamp': (new Date().getTime() / 1000 | 0) + '',
@@ -98,6 +126,56 @@ Page({
       }
     })
     */
+  },
+  submitOrder: function (payment) {
+    const page = this;
+    const avatarSplit = app.globalData.userInfo.avatarUrl.split('/');
+    const userId = avatarSplit[avatarSplit.length - 2];
+    const cart = this.data.cart;
+    const image = cart[0].productInfo.image
+    const totalPrice = +page.data.totalPrice;
+    const data = {
+      userId: userId,
+      shipment: {
+        name: page.data.shippingName,
+        address: page.data.shippingAddress,
+        postal: page.data.shippingPostal,
+        tel: page.data.shippingTel,
+      },
+      products: cart,
+      image: image,
+      shippingPrice: page.data.shippingPrice,
+      totalPrice: totalPrice,
+      finalPrice: totalPrice + page.data.shippingPrice,
+      status: 'created',
+      payment: payment
+    };
+    //console.log(data);
+    
+    wx.request({
+      method: 'POST',
+      url: `${app.globalData.apiBaseUrl}/v1/orders`,
+      header: {
+        'content-type': 'application/json'
+      },
+      data: data,
+      success: (res) => {
+        wx.hideLoading();
+        wx.setStorage({
+          key: 'cart',
+          data: [],
+        });
+        wx.reLaunch({
+          url: `/pages/order/order?id=${res.data.id}&notification=true`
+        });
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '订单提交失败，请重试',
+          icon: 'fail'
+        });
+      }
+    })
     
   },
 
@@ -118,7 +196,7 @@ Page({
     })
 
     let storedCart = wx.getStorageSync('cart');
-    if (storedCart.length > 0) {
+    if (storedCart.length > 0 && this.data.isShippingSet) {
       this.setData({
         disabled: false
       })

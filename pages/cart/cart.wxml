@@ -15,7 +15,7 @@
       </view>
       <view class="icon-view align-end">
         <image src="../../assets/heart.png" mode="aspectFit" id="heartWidth" class="icon-image align-end" bindload="iconLoad" style="width: {{heartWidth}}rpx"></image>
-        <navigator url="/pages/cart/cart" open-type="switchTab" class="align-end" style="height: 100%">
+        <navigator url="/pages/cart/cart" open-type="reLaunch" class="align-end" style="height: 100%">
           <image wx:if="{{bagEmpty}}" src="../../assets/bag.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
           <image wx:else src="../../assets/bag-full.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
         </navigator>

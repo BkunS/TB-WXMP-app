@@ -61,7 +61,10 @@ Page({
         'content-type': 'application/json'
       },
       success: function(res) {
-        wx.hideNavigationBarLoading()
+        wx.hideNavigationBarLoading();
+        page.setData({
+          order: res.data
+        })
         console.log(res.data);
       }
     })

@@ -31,7 +31,7 @@ Page({
     addToCartBTText: "加入购物袋",
     buyNowBTText: "立即购买",
     buttonLoading: false,
-    disabled: false
+    enableSize: false
   },
   globalMsgLoad: function (e) {
     const imgWidth = e.detail.width
@@ -85,7 +85,9 @@ Page({
     const selectedColorIndex = +e.detail.value;
     const selectedSizeIndex = page.data.selectedSizeIndex;
     const selectedSizes = page.data.product.variations[selectedColorIndex].sizes;
+    const enableSize = selectedSizes.length > 1 ? true : false;
     this.setData({
+      enableSize: enableSize,
       selectedSizes: selectedSizes,
       selectedSizeIndex: selectedSizeIndex < selectedSizes.length ? selectedSizeIndex : 0,
       selectedColorIndex: selectedColorIndex,
@@ -242,12 +244,15 @@ Page({
         product['salePriceStr'] = salePriceStr;
         product['priceStr'] = priceStr;
         const selectedColorIndex = 0;
+        const selectedSizes = product.variations[selectedColorIndex].sizes;
+        const enableSize = selectedSizes.length > 1 ? true : false;
         page.setData({
+          enableSize: enableSize,
           product: product,
           selectedColorIndex: selectedColorIndex,
           selectedSize: product.variations[selectedColorIndex].sizes[0].size,
           selectedId: product.variations[selectedColorIndex].sizes[0].id,
-          selectedSizes: product.variations[selectedColorIndex].sizes,
+          selectedSizes: selectedSizes,
           selectedColorName: product.variations[selectedColorIndex].colorName
         });
         page.radioLoad();

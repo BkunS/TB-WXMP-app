@@ -43,7 +43,11 @@ Page({
   },
   chooseAddressTap: function(e) {
     const page = this;
+    wx.showLoading({
+      title: '获取地址',
+    })
     app.wxAuthorize('address', () => {
+      wx.hideLoading();
       wx.chooseAddress({
         success: function (res) {
           const disabled = page.data.cart.length > 0 ? false : true;
@@ -76,7 +80,7 @@ Page({
                 wx.hideLoading()
                 wx.showModal({
                   title: '数额：￥' + page.data.totalPrice,
-                  content: '收款方：ToryBurch',
+                  content: '收款方：ToryBurch 中国',
                   confirmText: '支付',
                   success: (res) => {
                     if (res.confirm) {
@@ -85,7 +89,8 @@ Page({
                       });
                       app.getUserInfo(() => {
                         page.submitOrder({
-                          'type': 'WeChatPay'
+                          'type': 'WeChatPay',
+                          'paid': true
                         });
                       })
                     } else if (res.cancel) {
@@ -107,7 +112,8 @@ Page({
     });
     app.getUserInfo(() => {
       page.submitOrder({
-        'type': 'payUponDelivery'
+        'type': 'payUponDelivery',
+        'paid': false
       });
     })
 
@@ -131,8 +137,14 @@ Page({
     const page = this;
     const avatarSplit = app.globalData.userInfo.avatarUrl.split('/');
     const userId = avatarSplit[avatarSplit.length - 2];
-    const cart = this.data.cart;
-    const image = cart[0].productInfo.image
+    const cart = wx.getStorageSync('cart');
+    const fullCart = this.data.cart;
+    let products = cart.map((product, index) => {
+      product['price'] = fullCart[index].productInfo.price;
+      product['salePrice'] = fullCart[index].productInfo.salePrice;
+      return product;
+    })
+    const image = fullCart[0].productInfo.image
     const totalPrice = +page.data.totalPrice;
     const data = {
       userId: userId,
@@ -142,8 +154,8 @@ Page({
         postal: page.data.shippingPostal,
         tel: page.data.shippingTel,
       },
-      products: cart,
-      image: image,
+      products: products,
+      image: this.data.cart[0].productInfo.image,
       shippingPrice: page.data.shippingPrice,
       totalPrice: totalPrice,
       finalPrice: totalPrice + page.data.shippingPrice,

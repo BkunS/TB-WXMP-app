@@ -55,7 +55,7 @@
       </label>
     </radio-group>
   </view>
-  <view class="default-view" style="margin-top: 25rpx">
+  <view wx:if="{{enableSize}}" class="default-view" style="margin-top: 25rpx">
     <picker value="{{selectedSizes[selectedSizeIndex].id}}" range="{{selectedSizes}}" range-key="{{'size'}}" bindchange="pickerSelected"> 
       <view class="picker-view"> <view style="margin: auto">选择尺码：{{selectedSize}}</view> </view>
     </picker>

@@ -23,4 +23,8 @@
   </view>
   <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
   </view>
+
+  <view class='default-view'> 
+    {{order.id}}
+  </view>
 </view>

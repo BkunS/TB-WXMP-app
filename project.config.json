@@ -44,6 +44,12 @@
 					"name": "Cart",
 					"pathName": "pages/cart/cart",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "Confirmation",
+					"pathName": "pages/confirmation/confirmation",
+					"query": "id=VK7JcOGE6PG5GmkY4fltHs"
 				}
 			]
 		}

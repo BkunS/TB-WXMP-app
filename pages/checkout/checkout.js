@@ -178,7 +178,7 @@ Page({
           data: [],
         });
         wx.reLaunch({
-          url: `/pages/order/order?id=${res.data.id}&notification=true`
+          url: `/pages/confirmation/confirmation?id=${res.data.id}`
         });
       },
       fail: (res) => {

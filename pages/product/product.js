@@ -82,6 +82,7 @@ Page({
   },
   radioChange: function (e) {
     const page = this;
+    console.log(page.data.product)
     const selectedColorIndex = +e.detail.value;
     const selectedSizeIndex = page.data.selectedSizeIndex;
     const selectedSizes = page.data.product.variations[selectedColorIndex].sizes;
@@ -240,6 +241,25 @@ Page({
         descriptionList = descriptionList.map((value) => {
           return ' - ' + value;
         })
+        /*
+        let { variations } = product;
+        variations = variations.map((variation) => {
+          let sizes = variation.sizes;
+          return variation['sizes'] = sizes.map((size) => {
+            wx.request({
+              method: 'GET',
+              url: `${app.globalData.apiBaseUrl}/v1/inventories/${size.id}`,
+              success: (res) => {
+                const inventory = res.data.inventory;
+                size['inventory'] = inventory ? inventory : -1;
+              },
+              complete: (res) => {
+                return size;
+              }
+            })
+          })
+        });*/
+
         product['descriptionList'] = descriptionList;
         product['salePriceStr'] = salePriceStr;
         product['priceStr'] = priceStr;
@@ -255,6 +275,7 @@ Page({
           selectedSizes: selectedSizes,
           selectedColorName: product.variations[selectedColorIndex].colorName
         });
+        console.log(page.data.product);
         page.radioLoad();
       }
     })

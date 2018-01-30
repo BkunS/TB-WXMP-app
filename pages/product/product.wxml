@@ -57,7 +57,10 @@
   </view>
   <view wx:if="{{enableSize}}" class="default-view" style="margin-top: 25rpx">
     <picker value="{{selectedSizes[selectedSizeIndex].id}}" range="{{selectedSizes}}" range-key="{{'size'}}" bindchange="pickerSelected"> 
-      <view class="picker-view"> <view style="margin: auto">选择尺码：{{selectedSize}}</view> </view>
+      <view class="picker-view"> 
+        <view style="margin: auto" wx:if="{{selectedSizes[selectedSizeIndex].inventory <= 20}}">选择尺码：{{selectedSize}} - 只剩 {{selectedSizes[selectedSizeIndex].inventory}} 件</view>
+        <view style="margin: auto" wx:else>选择尺码：{{selectedSize}}</view>
+      </view>
     </picker>
   </view>
 

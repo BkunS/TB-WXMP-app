@@ -1,0 +1,22 @@
+/* pages/confirmation/confirmation.wxss */
+
+.wrapper-view {
+  margin-top: 40rpx;
+  padding: 0 40rpx;
+  width: calc(100% - 81)rpx;
+}
+
+.text-view {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  padding: 10rpx 0;
+  font-size: 30rpx;
+}
+
+.homeButton {
+  margin: 30rpx 0;
+  color: white; 
+  background-color: #0c2340;
+}
+

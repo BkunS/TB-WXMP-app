@@ -27,4 +27,9 @@
   <view class='default-view'> 
     {{order.id}}
   </view>
+  <view wx:for="{{order.products}}" wx:key="productId">
+    <view>
+      名称：{{item.displayName}}
+    </view>
+  </view>
 </view>

@@ -140,6 +140,7 @@ Page({
     const cart = wx.getStorageSync('cart');
     const fullCart = this.data.cart;
     let products = cart.map((product, index) => {
+      product['displayName'] = fullCart[index].productInfo.displayName;
       product['price'] = fullCart[index].productInfo.price;
       product['salePrice'] = fullCart[index].productInfo.salePrice;
       return product;
@@ -159,6 +160,7 @@ Page({
       products: products,
       image: this.data.cart[0].productInfo.image,
       shippingPrice: page.data.shippingPrice,
+      currency: app.globalData.defaultCurrency,
       totalPrice: totalPrice,
       finalPrice: totalPrice + page.data.shippingPrice,
       status: 'created',

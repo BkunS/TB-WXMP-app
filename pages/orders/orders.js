@@ -48,17 +48,31 @@ Page({
       topNavHeight: topNavHeight,
       placeholderHeight: this.data.placeholderHeight + topNavHeight,
     })
-    console.log(options)
+
+    let updatedOrders = [];
     wx.request({
       method: 'GET',
       url: `${app.globalData.apiBaseUrl}/v1/orders?userId=${options.userId}`,
       success: (res) => {
-        page.setData({
-          orders: res.data
+        let orders = res.data;
+        orders.forEach((order) => {
+          const { placeTime } = order;
+          const time = new Date(placeTime);
+          var options = {
+            year: "numeric", month: "short",
+            day: "numeric", hour: "2-digit", minute: "2-digit"
+          }; 
+          const timeStr = time.toLocaleTimeString("ja-JP", options);
+          order['timeStr'] = timeStr;
+          const currency = order.currency ? order.currency : app.globalData.defaultCurrency;
+          order['finalPriceStr'] = currency + order.finalPrice;
+          updatedOrders.push(order);
         })
       },
       complete: () => {
-        console.log(page.data.orders);
+        page.setData({
+          orders: updatedOrders
+        })
       }
     })
 

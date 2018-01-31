@@ -54,6 +54,8 @@ Page({
       placeholderHeight: this.data.placeholderHeight + topNavHeight,
     })
 
+    let fullProducts = [];
+    let order = {};
     wx.request({
       method: 'GET',
       url: `${app.globalData.apiBaseUrl}/v1/orders/${options.id}`,
@@ -61,11 +63,34 @@ Page({
         'content-type': 'application/json'
       },
       success: function(res) {
-        wx.hideNavigationBarLoading();
+        order = res.data;
+        let { products } = order;
+        console.log('products0:', products)
+        products.forEach((product) => {
+          console.log(product)
+          wx.request({
+            method: 'GET',
+            url: `${app.globalData.apiBaseUrl}/v1/products/${product.productId}`,
+            success: (res) => {
+              const { price } = product;
+              const { salePrice } = product;
+              product = res.data;
+              product['price'] = price;
+              product['salePrice'] = salePrice;
+            },
+            complete: () => {
+              fullProducts.push(product);
+            }
+          })
+        });
+        
+      },
+      complete: () => {
+        console.log('products:', fullProducts)
+        order['products'] = fullProducts;
         page.setData({
-          order: res.data
+          order: order
         })
-        console.log(res.data);
       }
     })
   },
@@ -74,7 +99,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    wx.hideNavigationBarLoading();
   },
 
   /**

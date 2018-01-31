@@ -31,7 +31,7 @@
     </block>
   </view>
   <view class="wrapper-view">
-    <navigator url="/pages/orders/orders">
+    <navigator url="/pages/orders/orders?userId={{userId}}">
       <view>
         查看订单
       </view>

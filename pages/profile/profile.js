@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: {},
+    userId: "",
     bagEmpty: true,
     placeholderHeight: 40,
     hambugerWidth: 0,
@@ -64,16 +66,24 @@ Page({
     })
 
     if (app.globalData.userInfo) {
+      const userInfo = app.globalData.userInfo;
+      const avatarSplit = userInfo.avatarUrl.split('/');
+      const userId = avatarSplit[avatarSplit.length - 2];
       this.setData({
-        userInfo: app.globalData.userInfo,
+        userId: userId,
+        userInfo: userInfo,
         hasUserInfo: true
       })
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
+        const userInfo = res.userInfo;
+        const avatarSplit = userInfo.avatarUrl.split('/');
+        const userId = avatarSplit[avatarSplit.length - 2];
         this.setData({
-          userInfo: res.userInfo,
+          userId: userId,
+          userInfo: userInfo,
           hasUserInfo: true
         })
       }
@@ -81,9 +91,13 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo
+          const userInfo = res.userInfo;
+          app.globalData.userInfo = userInfo;
+          const avatarSplit = userInfo.avatarUrl.split('/');
+          const userId = avatarSplit[avatarSplit.length - 2];
           this.setData({
-            userInfo: res.userInfo,
+            userId: userId,
+            userInfo: userInfo,
             hasUserInfo: true
           })
         }

@@ -146,6 +146,8 @@ Page({
     })
     const image = fullCart[0].productInfo.image
     const totalPrice = +page.data.totalPrice;
+    const now = new Date();
+    const placeTime = now.toISOString();
     const data = {
       userId: userId,
       shipment: {
@@ -160,7 +162,8 @@ Page({
       totalPrice: totalPrice,
       finalPrice: totalPrice + page.data.shippingPrice,
       status: 'created',
-      payment: payment
+      payment: payment,
+      placeTime: placeTime
     };
     //console.log(data);
     

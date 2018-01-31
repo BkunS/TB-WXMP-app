@@ -48,12 +48,10 @@ Page({
       topNavHeight: topNavHeight,
       placeholderHeight: this.data.placeholderHeight + topNavHeight,
     })
-
-    const avatarSplit = app.globalData.userInfo.avatarUrl.split('/');
-    const userId = avatarSplit[avatarSplit.length - 2];
+    console.log(options)
     wx.request({
       method: 'GET',
-      url: `${app.globalData.apiBaseUrl}/v1/orders?userId=${userId}`,
+      url: `${app.globalData.apiBaseUrl}/v1/orders?userId=${options.userId}`,
       success: (res) => {
         page.setData({
           orders: res.data

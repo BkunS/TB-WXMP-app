@@ -1,11 +1,40 @@
 <!--pages/profile/profile.wxml-->
 <view class="default-view">
-  <text>pages/profile/profile.wxml</text>
+  <view class="topNav-view">
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" bindload="globalMsgLoad"></image>
+    <view class="topNavBar" style="height:{{topNavHeight}}rpx;">
+      <view class="icon-view align-start">
+        <image src="../../assets/hamburger.png" mode="aspectFit" id="hamburgerWidth" class="icon-image align-start" bindload="iconLoad" style="width: {{hamburgerWidth}}rpx"></image>
+        <image src="../../assets/search.png" mode="aspectFit" id="searchWidth" class="icon-image align-start" bindload="iconLoad" style="width: {{searchWidth}}rpx"></image>
+      </view>
+      <view class="icon-view" style="text-align: center;">
+        <navigator url="/pages/index/index" open-type="switchTab" class="icon-image" style="height: 100%">
+          <image src="../../assets/logo.png" mode="aspectFit" id="logoWidth" class="icon-image" bindload="iconLoad" style="width: {{logoWidth}}rpx"></image>
+        </navigator>
+      </view>
+      <view class="icon-view align-end">
+        <image src="../../assets/heart.png" mode="aspectFit" id="heartWidth" class="icon-image align-end" bindload="iconLoad" style="width: {{heartWidth}}rpx"></image>
+        <navigator url="/pages/cart/cart" class="align-end" style="height: 100%">
+          <image wx:if="{{bagEmpty}}" src="../../assets/bag.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
+          <image wx:else src="../../assets/bag-full.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
+  </view>
+
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取用户信息 </button>
     <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     </block>
+  </view>
+  <view class="wrapper-view">
+    <navigator url="/pages/orders/orders">
+      <view>
+        查看订单
+      </view>
+    </navigator>
   </view>
 </view>

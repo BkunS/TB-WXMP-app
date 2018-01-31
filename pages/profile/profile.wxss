@@ -16,3 +16,9 @@
 .userinfo-nickname {
   color: #aaa;
 }
+
+.wrapper-view {
+  margin: 0;
+  padding: 0 30rpx;
+  width: 100vw;
+}

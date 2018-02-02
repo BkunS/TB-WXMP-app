@@ -14,7 +14,7 @@
         </navigator>
       </view>
       <view class="icon-view" style="text-align: center;">
-        <navigator url="/pages/index/index" open-type="switchTab" class="icon-image" style="height: 100%">
+        <navigator url="/pages/index/index" open-type="reLaunch" class="icon-image" style="height: 100%">
           <image src="../../assets/logo.png" mode="aspectFit" id="logoWidth" class="icon-image" bindload="iconLoad" style="width: {{logoWidth}}rpx"></image>
         </navigator>
       </view>
@@ -32,7 +32,14 @@
   <view wx:if="{{lookbooks}}" class="default-view">
     <view wx:for="{{lookbooks}}" wx:key="id" class="default-view">
       <view class="lookbook-item-view">
-        <image src="{{item.image}}" class="default-image" mode="widthFix" />
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular
+      bindchange="currentChange" current="{{current}}" style="height: {{imgHeights[current]}}rpx;">
+          <block wx:for="{{item.images}}" wx:key="{{current}}">
+            <swiper-item>
+              <image src="{{item}}" class="default-image swiper-image" mode="widthFix" bindload="imageLoad"/>
+            </swiper-item>
+          </block>
+        </swiper>
         <view class="lookbook-title-view"> {{item.title}} </view>
         <view class="lookbook-text-view"> {{item.text}} </view>
         <navigator url="/pages/lookbook/lookbook?id={{item.id}}" class=lookbook-button-view">

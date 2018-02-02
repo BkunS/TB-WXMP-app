@@ -2,7 +2,7 @@
 
 <view class="default-view">
   <view class="topNav-view">
-    <view class="default-view" style="hei+ht: {{statusBarHeight}}rpx; background-color: white"></view>
+    <view class="default-view" style="height: {{statusBarHeight}}rpx; background-color: white"></view>
     <view class="topNavBar" style="height:{{topNavHeight}}rpx;">
       <view wx:if="{{canNavBack}}" class="icon-view align-start">
         <navigator open-type="navigateBack" class="icon-image" style="height: 100%">

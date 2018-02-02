@@ -13,6 +13,12 @@ Page({
     canNavBack: false,
     userInfo: {},
     hasUserInfo: false,
+    current: 0,
+    imgHeights: [],
+    indicatorDots: true,
+    autoplay: false,
+    interval: 5000,
+    duration: 1000,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   globalMsgLoad: function (e) {
@@ -32,7 +38,22 @@ Page({
       [id]: iconWidth, 
     })
   },
-
+  imageLoad: function (e) {
+    let imgHeights = this.data.imgHeights
+    const imgWidth = e.detail.width
+    const imgHeight = e.detail.height
+    const ratio = imgWidth / imgHeight
+    const viewWidth = 750;
+    const viewHeight = viewWidth / ratio
+    imgHeights.push(viewHeight)
+    this.setData({
+      imgHeights: imgHeights,
+    })
+  },
+  currentChange: function (e) {
+    this.setData({ current: e.detail.current })
+  },
+  
   onLoad: function () {
     wx.showNavigationBarLoading();
     const page = this;

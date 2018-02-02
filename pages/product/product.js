@@ -63,6 +63,9 @@ Page({
       imgHeights: imgHeights,
     })
   },
+  currentChange: function (e) {
+    this.setData({ current: e.detail.current })
+  },
   radioLoad: function () {
     const page = this;
     this.data.product.variations.forEach((variation) => {
@@ -77,9 +80,6 @@ Page({
       ctx.fill()
       ctx.draw()
     })
-  },
-  currentChange: function (e) {
-    this.setData({ current: e.detail.current })
   },
   radioChange: function (e) {
     const page = this;
@@ -171,7 +171,7 @@ Page({
           fail: function() {
             wx.showToast({
               title: '添加失败，请重试',
-              icon: 'fail',
+              icon: 'none',
               duration: 2500
             })
           }
@@ -199,7 +199,7 @@ Page({
     const topNavHeight = app.globalData.topNavHeight
     const placeholderHeight = this.data.placeholderHeight + app.globalData.statusBarHeight +
       topNavHeight + app.globalData.defaultIconPadding;
-    const canNavBack = getCurrentPages().length > 1 ? true : false
+    const canNavBack = getCurrentPages().length > 1 ? true : false;
     this.setData({
       pageName: options.title ? options.title : page.data.title,
       canNavBack: canNavBack,

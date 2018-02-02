@@ -113,6 +113,10 @@
   text-decoration:line-through;
 }
 
+.textUnderLine {
+  text-decoration: underline;
+}
+
 .list-wrapper-view {
   width: calc(100vw - 50rpx);
   padding: 0 25rpx;

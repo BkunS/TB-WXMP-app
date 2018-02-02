@@ -5,15 +5,12 @@ const app = getApp()
 Page({
   data: {
     pageContents: {},
-    lookbooks: [],
-    categories:[],
     bagEmpty: true,
-    topNavHeight: 0,
-    placeholderHeight: 40,
-    hambugerWidth: 0,
-    searchWidth: 0,
+    statusBarHeight: app.globalData.statusBarHeight,
+    placeholderHeight: 0,
+    backWidth: 0,
     logoWidth: 0,
-    heartWidth: 0, 
+    canNavBack: false,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -40,9 +37,13 @@ Page({
     wx.showNavigationBarLoading();
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
+    const placeholderHeight = this.data.placeholderHeight + app.globalData.statusBarHeight +
+      topNavHeight + app.globalData.defaultIconPadding;
+    const canNavBack = getCurrentPages().length > 1 ? true : false
     this.setData({
+      canNavBack: canNavBack,
       topNavHeight: topNavHeight,
-      placeholderHeight: this.data.placeholderHeight + topNavHeight,
+      placeholderHeight: placeholderHeight,
     })
 
     wx.request({
@@ -105,7 +106,7 @@ Page({
           bagEmpty: res.data.length > 0 ? false : true
         })
       }
-    })
+    });
   },
 
   /**
@@ -126,7 +127,6 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading()
 
   },
 

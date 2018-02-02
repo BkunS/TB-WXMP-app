@@ -9,12 +9,12 @@ Page({
   data: {
     order: {},
     bagEmpty: true,
-    topNavHeight: 0,
-    placeholderHeight: 40,
-    hambugerWidth: 0,
-    searchWidth: 0,
+    statusBarHeight: app.globalData.statusBarHeight,
+    placeholderHeight: -5,
+    backWidth: 0,
     logoWidth: 0,
-    heartWidth: 0,
+    canNavBack: false,
+    pageName: "",
   },
   globalMsgLoad: function (e) {
     const imgWidth = e.detail.width
@@ -49,14 +49,19 @@ Page({
     }
 
     wx.setNavigationBarTitle({
-      title: '确认订单'
+      title: '下单成功！'
     })
     wx.showNavigationBarLoading()
 
     const topNavHeight = app.globalData.topNavHeight
+    const placeholderHeight = this.data.placeholderHeight + app.globalData.statusBarHeight +
+      topNavHeight + app.globalData.defaultIconPadding;
+    const canNavBack = getCurrentPages().length > 1 ? true : false
     this.setData({
+      pageName: '下单成功！',
+      canNavBack: canNavBack,
       topNavHeight: topNavHeight,
-      placeholderHeight: this.data.placeholderHeight + topNavHeight,
+      placeholderHeight: placeholderHeight,
     })
 
     wx.request({

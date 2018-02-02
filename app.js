@@ -40,7 +40,7 @@ App({
     } else {
       viewHeight = this.globalData.defaultIconHeight;
     }
-    return ratio * imgHeight * this.globalData.iconZoom;
+    return ratio * viewHeight * this.globalData.iconZoom;
   },
   getUserInfo: function(cb) {
     this.wxAuthorize('userInfo', () => {
@@ -107,12 +107,14 @@ App({
     openId: "",
     accessToken: "",
     defaultCurrency: "￥",
+    statusBarHeight: 33,
+    defaultIconPadding: 40,
     defaultIconHeight: 25,
-    defaultLogoHeight: 30,
-    topNavHeight: 60,
-    iconZoom: 0.6,
+    defaultLogoHeight: 45,
+    topNavHeight: 70,
+    iconZoom: 1.5,
     getTemplateNotificationBaseUrl: 'https://api.weixin.qq.com/cgi-bin/wxopen/template/library/get',
     getTemplateMsgListsBaseUrl: 'https://api.weixin.qq.com/cgi-bin/wxopen/template/library/list',
-    apiBaseUrl: 'https://digital-innovation-180520.appspot.com' // 'http://localhost:10010'
+    apiBaseUrl: 'http://localhost:10010' // 'https://digital-innovation-180520.appspot.com'
   }
 })

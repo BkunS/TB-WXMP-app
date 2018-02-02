@@ -7,8 +7,8 @@
 }
 
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  width: 192rpx;
+  height: 192rpx;
   margin: 20rpx;
   border-radius: 50%;
 }
@@ -19,6 +19,11 @@
 
 .wrapper-view {
   margin: 0;
-  padding: 0 30rpx;
-  width: 100vw;
+  padding: 0 150rpx;
+  margin-top: 60rpx;
+  width: 100%;
+}
+
+.item-view {
+  width: 500rpx;
 }

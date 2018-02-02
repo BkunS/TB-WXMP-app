@@ -61,8 +61,12 @@
   align-items: flex-end
 }
 
-.logo-image {
-
+.page-title-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  font-size: 32rpx;
 }
 
 .icon-image {

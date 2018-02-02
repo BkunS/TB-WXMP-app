@@ -1,6 +1,5 @@
-<!--pages/lookbook/lookbook.wxml-->
-
-<view class="default-view">
+<!--pages/storeInfo/storeInfo.wxml-->
+<view class="default-view" style="width: 100vw">
   <view class="topNav-view">
     <view class="default-view" style="height: {{statusBarHeight}}rpx; background-color: white"></view>
     <view class="topNavBar" style="height:{{topNavHeight}}rpx;">
@@ -27,26 +26,24 @@
   <view wx:if="{{pageContents.globalMsg}}">
     <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" style="margin-bottom: -10rpx"></image>
   </view>
-  
-  <view wx:if="{{pageContents.landingContents}}" class="default-view landing-view">
-    <image src="{{pageContents.landingContents}}" mode="widthFix" class="default-image"></image>
+
+  <view class="default-view">
+    <image src="../../assets/map.png" mode="widthFix" class="default-image"></image>
   </view>
 
-  <view wx:if="{{pageContents.filterAndSort}}" class="default-view filterAndSort-view">
-    <image src="{{pageContents.filterAndSort}}" mode="widthFix" class="default-image"></image>
-  </view>
-
-  <view class="default-view list-wrapper-view">
-    <view wx:for="{{lookbook.masterProducts}}" wx:key="id" class="default-view product-list-view">
-      <view class="product-item-view">
-        <navigator url="/pages/product/product?id={{item.id}}">
-          <image src="{{item.image}}" class="product-item-image" mode="widthFix"></image>
-          <view class="nameTag-view">
-            <text class="default-font productText-font"> {{item.displayName}}\n </text>
-            <text class="default-font price-font textLineThrough"> {{item.priceStr}} </text>
-            <text class="default-font price-font"> {{item.salePriceStr}} </text>
-          </view>
-        </navigator>
+  <view wx:if="{{stores}}" class="wrapper-view">
+    <view wx:for="{{stores}}" wx:key="id" class="store-item-view">
+      <view class="store-item-title"> 
+        {{item.name}} 
+      </view>
+      <view class="store-item-details">
+        地址:{{item.province}}{{item.city}}{{item.district}}{{item.address1}}{{item.address2}}
+      </view>
+      <view class="store-item-details">
+        电话：{{item.tel}}
+      </view>
+      <view class="store-item-details">
+        营业时间：{{item.businessHour}}
       </view>
     </view>
   </view>

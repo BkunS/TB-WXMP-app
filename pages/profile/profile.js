@@ -10,11 +10,11 @@ Page({
     userInfo: {},
     userId: "",
     bagEmpty: true,
-    placeholderHeight: 40,
-    hambugerWidth: 0,
-    searchWidth: 0,
+    statusBarHeight: app.globalData.statusBarHeight,
+    placeholderHeight: 0,
+    backWidth: 0,
     logoWidth: 0,
-    heartWidth: 0,
+    canNavBack: false,
   },
   globalMsgLoad: function (e) {
     const imgWidth = e.detail.width
@@ -53,16 +53,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '用户中心'
-    })
     wx.showNavigationBarLoading()
 
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
+    const placeholderHeight = this.data.placeholderHeight + app.globalData.statusBarHeight +
+      topNavHeight + app.globalData.defaultIconPadding;
+    const canNavBack = getCurrentPages().length > 1 ? true : false
     this.setData({
+      pageName: '用户中心',
+      canNavBack: canNavBack,
       topNavHeight: topNavHeight,
-      placeholderHeight: this.data.placeholderHeight + topNavHeight,
+      placeholderHeight: placeholderHeight,
     })
 
     if (app.globalData.userInfo) {
@@ -116,7 +118,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    wx.setNavigationBarTitle({
+      title: '用户中心'
+    })
   },
 
   /**

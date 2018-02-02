@@ -1,4 +1,4 @@
-// pages/category/category.js
+// pages/storeInfo/storeInfo.js
 const app = getApp();
 
 Page({
@@ -7,15 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    pageContents: {},
-    category: {},
+    canNavBack: getCurrentPages().length > 1 ? true : false,
+    topNavHeight: 0,
     bagEmpty: true,
     statusBarHeight: app.globalData.statusBarHeight,
-    placeholderHeight: -5,
+    placeholderHeight: 0,
     backWidth: 0,
     logoWidth: 0,
-    canNavBack: false,
-    pageName: "",
+    canNavBack: false
   },
   globalMsgLoad: function (e) {
     const imgWidth = e.detail.width
@@ -40,6 +39,9 @@ Page({
    */
   onLoad: function (options) {
     wx.showNavigationBarLoading()
+    wx.setNavigationBarTitle({
+      title: '门店信息'
+    })
 
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
@@ -47,55 +49,10 @@ Page({
       topNavHeight + app.globalData.defaultIconPadding;
     const canNavBack = getCurrentPages().length > 1 ? true : false
     this.setData({
+      pageName: '精品店',
       canNavBack: canNavBack,
       topNavHeight: topNavHeight,
       placeholderHeight: placeholderHeight,
-    })
-
-    wx.request({
-      method: 'GET',
-      url: app.globalData.apiBaseUrl + '/v1/contents/categories/' + options.id,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        page.setData({
-          pageContents: res.data
-        })
-      }
-    })
-    wx.request({
-      method: 'GET',
-      url: app.globalData.apiBaseUrl + '/v1/categories/' + options.id,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        let category = res.data
-
-        wx.setNavigationBarTitle({
-          title: category.displayName,
-        })
-
-        let { masterProducts } = category;
-        masterProducts.map((product) => {
-          const { price, salePrice } = product
-          let currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
-          let salePriceStr = currencyStr + product.salePrice;
-          let priceStr = "";
-          if (price > salePrice) {
-            priceStr = currencyStr + price;
-          }
-          product['priceStr'] = priceStr
-          product['salePriceStr'] = salePriceStr
-          return product;
-        })
-        category.masterProducts = masterProducts
-        page.setData({
-          category: category,
-          pageName: category.displayName,
-        })
-      }
     })
   },
 
@@ -111,17 +68,19 @@ Page({
    */
   onShow: function () {
     const page = this;
-    wx.setNavigationBarTitle({
-      title: '当季新品'
-    })
-    wx.getStorage({
-      key: 'cart',
-      success: function (res) {
+    wx.request({
+      method: 'GET',
+      url: `${app.globalData.apiBaseUrl}/v1/stores`,
+      success: (res) => {
         page.setData({
-          bagEmpty: res.data.length > 0 ? false : true
-        })
+          stores: res.data
+        });
+        console.log(page.data.stores);
+      },
+      complete: () => {
+        wx.hideNavigationBarLoading()
       }
-    })
+    });
   },
 
   /**

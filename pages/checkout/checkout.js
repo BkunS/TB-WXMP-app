@@ -16,12 +16,12 @@ Page({
     shippingPrice: 0,
     totalPrice: 0,
     bagEmpty: true,
-    topNavHeight: 0,
-    placeholderHeight: 40,
-    hambugerWidth: 0,
-    searchWidth: 0,
+    statusBarHeight: app.globalData.statusBarHeight,
+    placeholderHeight: -5,
+    backWidth: 0,
     logoWidth: 0,
-    heartWidth: 0,
+    canNavBack: false,
+    pageName: "",
     disabled: true
   },
   globalMsgLoad: function (e) {
@@ -207,9 +207,14 @@ Page({
 
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
+    const placeholderHeight = this.data.placeholderHeight + app.globalData.statusBarHeight +
+      topNavHeight + app.globalData.defaultIconPadding;
+    const canNavBack = getCurrentPages().length > 1 ? true : false
     this.setData({
+      pageName: '结算',
+      canNavBack: canNavBack,
       topNavHeight: topNavHeight,
-      placeholderHeight: this.data.placeholderHeight + topNavHeight,
+      placeholderHeight: placeholderHeight,
     })
 
     let storedCart = wx.getStorageSync('cart');

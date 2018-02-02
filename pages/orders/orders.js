@@ -9,11 +9,11 @@ Page({
   data: {
     orders: [],
     bagEmpty: true,
-    placeholderHeight: 40,
-    hambugerWidth: 0,
-    searchWidth: 0,
+    statusBarHeight: app.globalData.statusBarHeight,
+    placeholderHeight: 0,
+    backWidth: 0,
     logoWidth: 0,
-    heartWidth: 0,
+    canNavBack: false
   },
   globalMsgLoad: function (e) {
     const imgWidth = e.detail.width
@@ -44,11 +44,15 @@ Page({
 
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
+    const placeholderHeight = this.data.placeholderHeight + app.globalData.statusBarHeight +
+      topNavHeight + app.globalData.defaultIconPadding;
+    const canNavBack = getCurrentPages().length > 1 ? true : false
     this.setData({
+      pageName: '订单记录',
+      canNavBack: canNavBack,
       topNavHeight: topNavHeight,
-      placeholderHeight: this.data.placeholderHeight + topNavHeight,
+      placeholderHeight: placeholderHeight,
     })
-
     let updatedOrders = [];
     wx.request({
       method: 'GET',

@@ -11,11 +11,12 @@ Page({
     pageContents: {},
     topNavHeight: 0,
     bagEmpty: true,
-    placeholderHeight: 40,
-    hambugerWidth: 0,
-    searchWidth: 0,
+    statusBarHeight: app.globalData.statusBarHeight,
+    placeholderHeight: -5,
+    backWidth: 0,
     logoWidth: 0,
-    heartWidth: 0,
+    canNavBack: false,
+    pageName: "",
   },
   globalMsgLoad: function (e) {
     const imgWidth = e.detail.width
@@ -39,16 +40,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '当季新品'
-    })
     wx.showNavigationBarLoading()
 
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
+    const placeholderHeight = this.data.placeholderHeight + app.globalData.statusBarHeight +
+      topNavHeight + app.globalData.defaultIconPadding;
+    const canNavBack = getCurrentPages().length > 1 ? true : false
     this.setData({
+      pageName: '当季新品',
+      canNavBack: canNavBack,
       topNavHeight: topNavHeight,
-      placeholderHeight: this.data.placeholderHeight + topNavHeight,
+      placeholderHeight: placeholderHeight,
     })
     
     wx.request({
@@ -105,6 +108,9 @@ Page({
    */
   onShow: function () {
     const page = this;
+    wx.setNavigationBarTitle({
+      title: '当季新品'
+    })
     wx.getStorage({
       key: 'cart',
       success: function (res) {

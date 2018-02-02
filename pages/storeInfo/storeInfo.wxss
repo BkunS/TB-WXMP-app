@@ -1,0 +1,18 @@
+/* pages/storeInfo/storeInfo.wxss */
+.wrapper-view {
+  padding: 0 50rpx;
+}
+
+.store-item-view {
+  margin: 50rpx 0;
+}
+
+.store-item-title {
+  font-weight: 500;
+  margin-bottom: 20rpx;
+}
+
+.store-item-details {
+  font-size: 30rpx;
+  padding: 0 10rpx;
+}

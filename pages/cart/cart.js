@@ -11,12 +11,12 @@ Page({
     totalPrice: 0,
     totalPriceStr: "", 
     bagEmpty: true,
-    topNavHeight: 0,
-    placeholderHeight: 40,
-    hambugerWidth: 0,
-    searchWidth: 0,
+    statusBarHeight: app.globalData.statusBarHeight,
+    placeholderHeight: -5,
+    backWidth: 0,
     logoWidth: 0,
-    heartWidth: 0,
+    canNavBack: false,
+    pageName: "",
     disabled: true
   },
   globalMsgLoad: function (e) {
@@ -82,29 +82,52 @@ Page({
       title: '购物袋'
     })
     wx.showNavigationBarLoading();
-
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
+    const placeholderHeight = this.data.placeholderHeight + app.globalData.statusBarHeight +
+      topNavHeight + app.globalData.defaultIconPadding;
+    const canNavBack = getCurrentPages().length > 1 ? true : false
     this.setData({
+      pageName: '购物袋',
+      canNavBack: canNavBack,
       topNavHeight: topNavHeight,
-      placeholderHeight: this.data.placeholderHeight + topNavHeight,
+      placeholderHeight: placeholderHeight,
     })
+    wx.request({
+      method: 'GET',
+      url: app.globalData.apiBaseUrl + '/v1/contents/cart',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: (res) => {
+        page.setData({
+          pageContents: res.data
+        });
+      }
+    })
+  },
 
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    wx.hideNavigationBarLoading()
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    const page = this;
+    wx.showNavigationBarLoading();
     wx.getStorage({
       key: 'cart',
       success: function (res) {
-        if (res.data.length > 0) {
-          page.setData({
-            bagEmpty: false
-          })
-        } else {
-          page.setData({
-            bagEmpty: true
-          })
-        }
+        page.setData({
+          bagEmpty: res.data.length > 0 ? false : true
+        })
       }
     })
-
     let storedCart = wx.getStorageSync('cart');
     if (storedCart.length > 0) {
       this.setData({
@@ -142,41 +165,6 @@ Page({
         })
       });
     }
-
-    wx.request({
-      method: 'GET',
-      url: app.globalData.apiBaseUrl + '/v1/contents/cart',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        page.setData({
-          pageContents: res.data
-        });
-      }
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    wx.hideNavigationBarLoading()
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    const page = this;
-    wx.getStorage({
-      key: 'cart',
-      success: function (res) {
-        page.setData({
-          bagEmpty: res.data.length > 0 ? false : true
-        })
-      }
-    })
   },
 
   /**

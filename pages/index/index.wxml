@@ -1,30 +1,35 @@
 <!--index.wxml-->
 <view class="default-view">
   <view class="topNav-view">
-    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" bindload="globalMsgLoad"></image>
+    <view class="default-view" style="height: {{statusBarHeight}}rpx; background-color: white"></view>
     <view class="topNavBar" style="height:{{topNavHeight}}rpx;">
-      <view class="icon-view align-start">
-        <image src="../../assets/hamburger.png" mode="aspectFit" id="hamburgerWidth" class="icon-image align-start" bindload="iconLoad" style="width: {{hamburgerWidth}}rpx"></image>
-        <image src="../../assets/search.png" mode="aspectFit" id="searchWidth" class="icon-image align-start" bindload="iconLoad" style="width: {{searchWidth}}rpx"></image>
+      <view wx:if="{{canNavBack}}" class="icon-view align-start">
+        <navigator open-type="navigateBack" class="icon-image" style="height: 100%">
+          <image src="../../assets/back.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+        </navigator>
       </view>
-      <view class="icon-view" style="text-align: center">
-        <navigator url="/pages/index/index" open-type="reLaunch" class="icon-image">
+      <view wx:else class="icon-view align-start">
+        <navigator open-type="navigateBack" class="icon-image" style="height: 100%">
+          <image src="../../assets/backEmpty.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+        </navigator>
+      </view>
+      <view class="icon-view" style="text-align: center;">
+        <navigator url="/pages/index/index" open-type="switchTab" class="icon-image" style="height: 100%">
           <image src="../../assets/logo.png" mode="aspectFit" id="logoWidth" class="icon-image" bindload="iconLoad" style="width: {{logoWidth}}rpx"></image>
         </navigator>
       </view>
-      <view class="icon-view align-end">
-        <image src="../../assets/heart.png" mode="aspectFit" id="heartWidth" class="icon-image align-end" bindload="iconLoad" style="width: {{heartWidth}}rpx"></image>
-        <navigator url="/pages/cart/cart" class="align-end" style="height: 100%">
-          <image wx:if="{{bagEmpty}}" src="../../assets/bag.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
-          <image wx:else src="../../assets/bag-full.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
-        </navigator>
+      <view class="icon-view align-end" style="padding: 0 20rpx">
+        <image src="../../assets/backEmpty.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
       </view>
     </view>
   </view>
   <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
   </view>
+  <view wx:if="{{pageContents.globalMsg}}">
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" style="margin-bottom: -10rpx"></image>
+  </view>
 
-  <view class="default-view">
+  <view wx:if="{{lookbooks}}" class="default-view">
     <view wx:for="{{lookbooks}}" wx:key="id" class="default-view">
       <view class="lookbook-item-view">
         <image src="{{item.image}}" class="default-image" mode="widthFix" />
@@ -37,10 +42,10 @@
     </view>
   </view>
 
-  <view class="default-view" class="categories-title-view">
+  <view class="default-view" class="categories-title-view" wx:if="{{categories}}">
     <text> 商品分类 </text>
   </view>
-  <view class="default-view list-wrapper-view">
+  <view class="default-view list-wrapper-view" wx:if="{{categories}}">
     <view wx:for="{{categories}}" wx:key="id" class="default-view category-list-view">
       <view class="category-item-view">
         <navigator url="/pages/category/category?id={{item.id}}">
@@ -51,7 +56,7 @@
     </view>
   </view>
   
-  <view class="default-view">
+  <view class="default-view" wx:if="{{pageContents.heroContents.heroVideo}}">
     <video src="{{pageContents.heroContents.heroVideo}}" autoplay loop muted objectFit="cover" style="width: 100vw"></video>
     <view class="heroText-view">
       <text class="default-font heroText-font">{{pageContents.heroContents.heroText}}</text>

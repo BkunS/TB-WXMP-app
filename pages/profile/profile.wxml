@@ -1,27 +1,30 @@
 <!--pages/profile/profile.wxml-->
 <view class="default-view">
   <view class="topNav-view">
-    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" bindload="globalMsgLoad"></image>
+    <view class="default-view" style="height: {{statusBarHeight}}rpx; background-color: white"></view>
     <view class="topNavBar" style="height:{{topNavHeight}}rpx;">
-      <view class="icon-view align-start">
-        <image src="../../assets/hamburger.png" mode="aspectFit" id="hamburgerWidth" class="icon-image align-start" bindload="iconLoad" style="width: {{hamburgerWidth}}rpx"></image>
-        <image src="../../assets/search.png" mode="aspectFit" id="searchWidth" class="icon-image align-start" bindload="iconLoad" style="width: {{searchWidth}}rpx"></image>
-      </view>
-      <view class="icon-view" style="text-align: center;">
-        <navigator url="/pages/index/index" open-type="switchTab" class="icon-image" style="height: 100%">
-          <image src="../../assets/logo.png" mode="aspectFit" id="logoWidth" class="icon-image" bindload="iconLoad" style="width: {{logoWidth}}rpx"></image>
+      <view wx:if="{{canNavBack}}" class="icon-view align-start">
+        <navigator open-type="navigateBack" class="icon-image" style="height: 100%">
+          <image src="../../assets/back.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
         </navigator>
       </view>
-      <view class="icon-view align-end">
-        <image src="../../assets/heart.png" mode="aspectFit" id="heartWidth" class="icon-image align-end" bindload="iconLoad" style="width: {{heartWidth}}rpx"></image>
-        <navigator url="/pages/cart/cart" class="align-end" style="height: 100%">
-          <image wx:if="{{bagEmpty}}" src="../../assets/bag.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
-          <image wx:else src="../../assets/bag-full.png" mode="aspectFit" id="bagWidth"  class="icon-image align-end" bindload="iconLoad" style="width: {{bagWidth}}rpx"></image>
+      <view wx:else class="icon-view align-start">
+        <navigator open-type="navigateBack" class="icon-image" style="height: 100%">
+          <image src="../../assets/backEmpty.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
         </navigator>
+      </view>
+      <view class="icon-view page-title-view" style="text-align: center;">
+        {{pageName}}
+      </view>
+      <view class="icon-view align-end" style="padding: 0 20rpx">
+        <image src="../../assets/backEmpty.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
       </view>
     </view>
   </view>
   <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
+  </view>
+  <view wx:if="{{pageContents.globalMsg}}">
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" style="margin-bottom: -10rpx"></image>
   </view>
 
   <view class="userinfo">
@@ -29,12 +32,15 @@
     <block wx:else>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     </block>
+    <block class="userinfo-nickname">
+      <text> {{userInfo.nickName}} </text>
+    </block>
   </view>
   <view class="wrapper-view">
-    <navigator url="/pages/orders/orders?userId={{userId}}">
-      <view>
+    <view class="item-view">
+      <navigator url="/pages/orders/orders?userId={{userId}}">
         查看订单
-      </view>
-    </navigator>
+      </navigator>
+    </view>
   </view>
 </view>

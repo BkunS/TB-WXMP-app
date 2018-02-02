@@ -28,7 +28,7 @@
     <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" style="margin-bottom: -10rpx"></image>
   </view>
   
-  <view class="wrapper-view">
+  <view class="wrapper-view" wx:if="{{cart}}">
     <view wx:for="{{cart}}" wx:key="productId" class="default-view cart-list-view">
       <view class="product-item-view">
         <view class="item-img-view">
@@ -79,6 +79,9 @@
         <button disabled="{{disabled}}" class="button checkout-button" hover-class="button-hover">去结算</button>
       </navigator>
     </view>
+  </view>
+  <view class="default-view" wx:else>
+    <image src="../../assets/shoppingBag.gif" mode="widthFix" />
   </view>
   <view class="default-view">
   </view>

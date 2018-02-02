@@ -2,23 +2,23 @@
 
 <view class="default-view">
   <view class="topNav-view">
-    <view class="default-view" style="height: {{statusBarHeight}}rpx; background-color: white"></view>
+    <view class="default-view" style="hei+ht: {{statusBarHeight}}rpx; background-color: white"></view>
     <view class="topNavBar" style="height:{{topNavHeight}}rpx;">
       <view wx:if="{{canNavBack}}" class="icon-view align-start">
         <navigator open-type="navigateBack" class="icon-image" style="height: 100%">
-          <image src="../../assets/back.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+          <image src="../../assets/back.png" mode="aspectFit" id="back" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
         </navigator>
       </view>
       <view wx:else class="icon-view align-start">
         <navigator open-type="navigateBack" class="icon-image" style="height: 100%">
-          <image src="../../assets/backEmpty.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+          <image src="../../assets/backEmpty.png" mode="aspectFit" id="back" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
         </navigator>
       </view>
       <view class="icon-view page-title-view" style="text-align: center;">
         {{pageName}}
       </view>
       <view class="icon-view align-end" style="padding: 0 20rpx">
-        <image src="../../assets/backEmpty.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+        <image src="../../assets/backEmpty.png" mode="aspectFit" id="back" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
       </view>
     </view>
   </view>
@@ -84,6 +84,20 @@
     <view class="description-title-view"> 寄送方式：</view>
     <view class="description-text-view"> 免运费，退货包邮 </view>
     <view class="description-list-view"> 2天内送货上门 </view>
+  </view>
+
+  <view class="button-view">
+    <view class="default-view share-wrapper">
+      <view class="description-title-view" style="padding-right: 30rpx"> 分享: </view>
+      <view class="share-icon-view description-title-view">
+        <image src="../../assets/wechat-icon-blue.png" mode="aspectFit" id="shareIcon" bindload="iconLoad" style="width: {{shareIconWidth}}rpx; height: {{shareIconHeight}}rpx; margin: 0 30rpx" class="share-button"/> 
+        <button open-type='share' plain class="share-button" style="width: {{shareIconWidth + 60}}rpx; height: {{shareIconHeight}}rpx; border: 0"></button> 
+      </view>
+
+      <!--<view class="description-title-view">
+        <image src="../../assets/weibo-icon.png" mode="aspectFit" id="shareIcon" bindload="iconLoad" style="width: {{shareIconWidth}}rpx; height: {{shareIconHeight}}rpx; margin: 0 30rpx" /> 
+      </view> -->
+    </view>
   </view>
 
   <view class="default-view">

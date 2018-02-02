@@ -118,8 +118,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    const page = this; 
     wx.setNavigationBarTitle({
       title: '用户中心'
+    })
+    wx.showNavigationBarLoading();
+    wx.getStorage({
+      key: 'cart',
+      success: function (res) {
+        const count = res.data.length;
+        page.setData({
+          bagEmpty: count > 0 ? false : true
+        })
+        wx.setTabBarItem({
+          index: 1,
+          text: `购物袋${count > 0 ? ' (' + count + ')' : ''}`
+        })
+      },
+      complete: () => {
+        wx.hideNavigationBarLoading();
+      }
     })
   },
 

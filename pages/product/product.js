@@ -14,6 +14,7 @@ Page({
     placeholderHeight: 0,
     backWidth: 0,
     logoWidth: 0,
+    shareIconHeight: app.globalData.defaultShareIconHeight,
     canNavBack: false,
     selectedColorIndex: 0,
     selectedColorName: "",
@@ -30,7 +31,8 @@ Page({
     addToCartBTText: "加入购物袋",
     buyNowBTText: "立即购买",
     buttonLoading: false,
-    enableSize: false
+    enableSize: false,
+    title: "明星产品"
   },
   globalMsgLoad: function (e) {
     const imgWidth = e.detail.width
@@ -46,7 +48,7 @@ Page({
     const iconWidth = app.navIconLoad(e)
     const id = e.currentTarget.id;
     this.setData({
-      [id]: iconWidth,
+      [id + 'Width']: iconWidth,
     })
   },
   imageLoad: function (e) {
@@ -67,7 +69,7 @@ Page({
       let ctx = wx.createCanvasContext(variation.color.replace(/' '/g, '_') + 'Canvas')
       ctx.arc(30, 30, 15, 0, 2 * Math.PI)
       if (variation.index === page.data.selectedColorIndex) {
-        ctx.setStrokeStyle("green")
+        ctx.setStrokeStyle("#0c2340")
         ctx.setLineWidth(5)
       }
       ctx.stroke()
@@ -183,6 +185,10 @@ Page({
       url: '/pages/checkout/checkout',
     })
   },
+  wechatShare: function(e) {
+    const Page = this;
+    Page.onShareAppMessage();
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -195,7 +201,7 @@ Page({
       topNavHeight + app.globalData.defaultIconPadding;
     const canNavBack = getCurrentPages().length > 1 ? true : false
     this.setData({
-      pageName: '当季新品',
+      pageName: options.title ? options.title : page.data.title,
       canNavBack: canNavBack,
       topNavHeight: topNavHeight,
       placeholderHeight: placeholderHeight,

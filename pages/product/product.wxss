@@ -78,3 +78,17 @@
   font-size: 28rpx;
   margin: 10rpx 0;
 }
+
+.share-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.share-icon-view {
+  position: relative;
+}
+
+.share-button {
+  position: absolute;
+}

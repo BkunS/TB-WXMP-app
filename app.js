@@ -37,6 +37,8 @@ App({
     let viewHeight = 0;
     if (e.currentTarget.id === "logoWidth") {
       viewHeight = this.globalData.defaultLogoHeight;
+    } else if (e.currentTarget.id === "shareIconWidth") {
+      viewHeight = this.globalData.defaultShareIconHeight;
     } else {
       viewHeight = this.globalData.defaultIconHeight;
     }
@@ -111,10 +113,11 @@ App({
     defaultIconPadding: 40,
     defaultIconHeight: 25,
     defaultLogoHeight: 45,
+    defaultShareIconHeight: 50,
     topNavHeight: 70,
     iconZoom: 1.5,
     getTemplateNotificationBaseUrl: 'https://api.weixin.qq.com/cgi-bin/wxopen/template/library/get',
     getTemplateMsgListsBaseUrl: 'https://api.weixin.qq.com/cgi-bin/wxopen/template/library/list',
-    apiBaseUrl: 'http://localhost:10010' // 'https://digital-innovation-180520.appspot.com'
+    apiBaseUrl: 'https://digital-innovation-180520.appspot.com' // 'http://localhost:10010'
   }
 })

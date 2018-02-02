@@ -102,8 +102,13 @@ Page({
     wx.getStorage({
       key: 'cart',
       success: function (res) {
+        const count = res.data.length;
         page.setData({
-          bagEmpty: res.data.length > 0 ? false : true
+          bagEmpty: count > 0 ? false : true
+        })
+        wx.setTabBarItem({
+          index: 1,
+          text: `购物袋${count > 0 ? ' (' + count + ')' : ''}`
         })
       }
     });

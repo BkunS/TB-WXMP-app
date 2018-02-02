@@ -7,7 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cart:[],
     totalPrice: 0,
     totalPriceStr: "", 
     bagEmpty: true,
@@ -67,10 +66,20 @@ Page({
     this.setData({
       bagEmpty: cart.length > 0 ? false : true
     })
-    wx.setStorageSync('cart', cart)
-    wx.showToast({
-      title: '商品已移除',
-      duration: 1500
+    wx.setStorage({
+      key: 'cart',
+      data: cart,
+      success: (res) => {
+        const count = cart.length;
+        wx.setTabBarItem({
+          index: 1,
+          text: `购物袋${count > 0 ? ' (' + count + ')' : ''}`
+        })
+        wx.showToast({
+          title: '商品已移除',
+          duration: 1500
+        })
+      }
     })
   },
   
@@ -123,8 +132,15 @@ Page({
     wx.getStorage({
       key: 'cart',
       success: function (res) {
+        const count = res.data.length;
+        const cart = count > 0 ? res.data : null;
         page.setData({
-          bagEmpty: res.data.length > 0 ? false : true
+          bagEmpty: count > 0 ? false : true,
+          cart: cart
+        })
+        wx.setTabBarItem({
+          index: 1,
+          text: `购物袋${count > 0 ? ' (' + count + ')' : ''}`
         })
       }
     })

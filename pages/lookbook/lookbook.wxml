@@ -39,7 +39,7 @@
   <view class="default-view list-wrapper-view">
     <view wx:for="{{lookbook.masterProducts}}" wx:key="id" class="default-view product-list-view">
       <view class="product-item-view">
-        <navigator url="/pages/product/product?id={{item.id}}">
+        <navigator url="/pages/product/product?id={{item.id}}&title=当季新品">
           <image src="{{item.image}}" class="product-item-image" mode="widthFix"></image>
           <view class="nameTag-view">
             <text class="default-font productText-font"> {{item.displayName}}\n </text>

@@ -80,8 +80,9 @@
       </navigator>
     </view>
   </view>
-  <view class="default-view" wx:else>
-    <image src="../../assets/shoppingBag.gif" mode="widthFix" />
+  <view class="default-view" wx:else style="text-align: center">
+    <image src="../../assets/shoppingBag.gif" mode="widthFix" class="default-image"/>
+    购物袋空空如也
   </view>
   <view class="default-view">
   </view>

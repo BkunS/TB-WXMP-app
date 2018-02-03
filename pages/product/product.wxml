@@ -91,7 +91,7 @@
       <view class="description-title-view" style="padding-right: 30rpx"> 分享: </view>
       <view class="share-icon-view description-title-view">
         <image src="../../assets/wechat-icon-blue.png" mode="aspectFit" id="shareIcon" bindload="iconLoad" style="width: {{shareIconWidth}}rpx; height: {{shareIconHeight}}rpx; margin: 0 30rpx" class="share-button"/> 
-        <button open-type='share' plain class="share-button" style="width: {{shareIconWidth + 60}}rpx; height: {{shareIconHeight}}rpx; border: 0"></button> 
+        <button open-type='share' plain class="share-button" style="width: {{shareIconWidth + 60}}rpx; height: {{shareIconHeight}}rpx; border: 0" bindtap="wechatShare"></button> 
       </view>
 
       <!--<view class="description-title-view">

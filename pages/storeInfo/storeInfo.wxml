@@ -37,7 +37,7 @@
         {{item.name}} 
       </view>
       <view class="store-item-details">
-        地址:{{item.province}}{{item.city}}{{item.district}}{{item.address1}}{{item.address2}}
+        地址: {{item.province}}{{item.city}}{{item.district}}{{item.address1}}{{item.address2}}
       </view>
       <view class="store-item-details">
         电话：{{item.tel}}

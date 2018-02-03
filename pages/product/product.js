@@ -186,8 +186,7 @@ Page({
     })
   },
   wechatShare: function(e) {
-    const Page = this;
-    Page.onShareAppMessage();
+    
   },
 
   /**
@@ -348,6 +347,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    wx.hideLoading();
     return {
       title: 'ToryBurch - ' + this.data.product.displayName,
       desc: '',

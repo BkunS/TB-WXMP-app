@@ -55,16 +55,15 @@ Page({
         array.splice(index, 1);
         let updatedPrice = totalPrice - itemPrice
         let currency = item.productInfo.currency ? item.productInfo.currency : app.globalData.defaultCurrency
+        const count = cart.length;
         this.setData({
-          cart: cart,
-          disabled: cart.length === 0 || updatedPrice === 0 ? true : false,
+          cart: count > 0 ? cart : null,
+          bagEmpty: count > 0 ? false : true,
+          disabled: count === 0 || updatedPrice === 0 ? true : false,
           totalPrice: updatedPrice,
           totalPriceStr: currency + updatedPrice
         })
       }
-    })
-    this.setData({
-      bagEmpty: cart.length > 0 ? false : true
     })
     wx.setStorage({
       key: 'cart',

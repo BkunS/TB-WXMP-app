@@ -31,7 +31,7 @@ Page({
     const iconWidth = app.navIconLoad(e)
     const id = e.currentTarget.id;
     this.setData({
-      [id]: iconWidth,
+      [id +'Width']: iconWidth,
     })
   },
 

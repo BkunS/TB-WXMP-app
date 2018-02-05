@@ -1,31 +1,30 @@
 <!--product.wxml-->
-
-<view class="default-view">
-  <view class="topNav-view">
-    <view class="default-view" style="height: {{statusBarHeight}}rpx; background-color: white"></view>
-    <view class="topNavBar" style="height:{{topNavHeight}}rpx;">
-      <view wx:if="{{canNavBack}}" class="icon-view align-start">
-        <navigator open-type="navigateBack" class="icon-image" style="height: 100%">
-          <image src="../../assets/back.png" mode="aspectFit" id="back" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+<view class="fullWidth">
+  <view class="header">
+    <view class="fullWidth" style="height: {{statusBarHeight}}rpx; background-color: white"></view>
+    <view class="header-topNavbar" style="height:{{topNavHeight}}rpx;">
+      <view wx:if="{{canNavBack}}" class="header-topNavbar-navWrapper alignStart">
+        <navigator open-type="navigateBack" class="header-topNavbar-nav" style="height: 100%">
+          <image src="../../assets/back.png" mode="aspectFit" id="back" class=".header-topNavbar-nav-image" bindload="iconLoad" style="width: {{backWidth}}rpx;" />
         </navigator>
       </view>
-      <view wx:else class="icon-view align-start">
-        <navigator open-type="navigateBack" class="icon-image" style="height: 100%">
-          <image src="../../assets/backEmpty.png" mode="aspectFit" id="back" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+      <view wx:else class="header-topNavbar-navWrapper alignStart">
+        <navigator open-type="navigateBack" class="header-topNavbar-nav" style="height: 100%">
+          <image src="../../assets/backEmpty.png" mode="aspectFit" id="back" class=".header-topNavbar-nav-image" bindload="iconLoad" style="width: {{backWidth}}rpx;" />
         </navigator>
       </view>
-      <view class="icon-view page-title-view" style="text-align: center;">
+      <view class="header-topNavbar-navWrapper" style="flex-direction: column;">
         {{pageName}}
       </view>
-      <view class="icon-view align-end" style="padding: 0 20rpx">
-        <image src="../../assets/backEmpty.png" mode="aspectFit" id="back" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+      <view class="header-topNavbar-navWrapper alignEnd" style="padding: 0 20rpx">
+        <image src="../../assets/backEmpty.png" mode="aspectFit" id="back" class=".header-topNavbar-nav-image" bindload="iconLoad" style="width: {{backWidth}}rpx;" />
       </view>
     </view>
   </view>
-  <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
+  <view class="placeholder" style="height: {{placeholderHeight}}rpx;">
   </view>
   <view wx:if="{{pageContents.globalMsg}}">
-    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" style="margin-bottom: -10rpx"></image>
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="fullWidth" style="margin-bottom: -10rpx" />
   </view>
 
   <view class="default-view title-view">

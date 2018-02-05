@@ -79,11 +79,8 @@ Page({
 
         let { masterProducts } = category;
         masterProducts.map((product) => {
-          const { price, salePrice } = product;
-          
           const currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
-          const priceRange = product.priceRange;
-          const salePriceRange = product.salePriceRange;
+          const { priceRange, salePriceRange } = product;
           let priceStr = '';
           let salePriceStr = currencyStr + salePriceRange[0]
           if (salePriceRange[1]) {
@@ -96,11 +93,6 @@ Page({
           if (priceRange[1] && priceRange[1] !== salePriceRange[1]) {
             priceStr = currencyStr + priceRange[0] + '-' + currencyStr + priceRange[1]
           }
-
-          let { descriptionList } = product;
-          descriptionList = descriptionList.map((value) => {
-            return ' - ' + value;
-          });
           
           product['salePriceStr'] = salePriceStr;
           product['priceStr'] = priceStr;

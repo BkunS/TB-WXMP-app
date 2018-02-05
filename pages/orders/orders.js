@@ -77,6 +77,7 @@ Page({
         page.setData({
           orders: updatedOrders
         })
+        console.log(page.data.orders)
       }
     })
 

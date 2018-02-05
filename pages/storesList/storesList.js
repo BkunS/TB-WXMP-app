@@ -1,4 +1,4 @@
-// pages/category/category.js
+// pages/storesList/storesList.js
 const app = getApp();
 
 Page({
@@ -7,8 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    pageContents: {},
-    category: {},
     bagEmpty: true,
     statusBarHeight: app.globalData.statusBarHeight,
     placeholderHeight: -5,
@@ -47,71 +45,10 @@ Page({
       topNavHeight + app.globalData.defaultIconPadding;
     const canNavBack = getCurrentPages().length > 1 ? true : false
     this.setData({
+      pageName: "全部精品店",
       canNavBack: canNavBack,
       topNavHeight: topNavHeight,
       placeholderHeight: placeholderHeight,
-    })
-
-    wx.request({
-      method: 'GET',
-      url: app.globalData.apiBaseUrl + '/v1/contents/categories/' + options.id,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        page.setData({
-          pageContents: res.data
-        })
-      }
-    })
-    wx.request({
-      method: 'GET',
-      url: app.globalData.apiBaseUrl + '/v1/categories/' + options.id,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        let category = res.data
-
-        wx.setNavigationBarTitle({
-          title: category.displayName,
-        })
-
-        let { masterProducts } = category;
-        masterProducts.map((product) => {
-          const { price, salePrice } = product;
-          
-          const currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
-          const priceRange = product.priceRange;
-          const salePriceRange = product.salePriceRange;
-          let priceStr = '';
-          let salePriceStr = currencyStr + salePriceRange[0]
-          if (salePriceRange[1]) {
-            salePriceStr += '-' + currencyStr + salePriceRange[1];
-          }
-
-          if (salePriceRange[0] !== priceRange[0]) {
-            priceStr = '￥' + priceRange[0];
-          }
-          if (priceRange[1] && priceRange[1] !== salePriceRange[1]) {
-            priceStr = currencyStr + priceRange[0] + '-' + currencyStr + priceRange[1]
-          }
-
-          let { descriptionList } = product;
-          descriptionList = descriptionList.map((value) => {
-            return ' - ' + value;
-          });
-          
-          product['salePriceStr'] = salePriceStr;
-          product['priceStr'] = priceStr;
-          return product;
-        })
-        category.masterProducts = masterProducts
-        page.setData({
-          category: category,
-          pageName: category.displayName,
-        })
-      }
     })
   },
 
@@ -128,7 +65,7 @@ Page({
   onShow: function () {
     const page = this;
     wx.setNavigationBarTitle({
-      title: '当季新品'
+      title: '全部精品店'
     })
     wx.getStorage({
       key: 'cart',

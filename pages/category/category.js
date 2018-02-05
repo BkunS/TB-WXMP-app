@@ -31,7 +31,7 @@ Page({
     const iconWidth = app.navIconLoad(e)
     const id = e.currentTarget.id;
     this.setData({
-      [id]: iconWidth,
+      [id +'Width']: iconWidth,
     })
   },
 
@@ -79,15 +79,31 @@ Page({
 
         let { masterProducts } = category;
         masterProducts.map((product) => {
-          const { price, salePrice } = product
-          let currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
-          let salePriceStr = currencyStr + product.salePrice;
-          let priceStr = "";
-          if (price > salePrice) {
-            priceStr = currencyStr + price;
+          const { price, salePrice } = product;
+          
+          const currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
+          const priceRange = product.priceRange;
+          const salePriceRange = product.salePriceRange;
+          let priceStr = '';
+          let salePriceStr = currencyStr + salePriceRange[0]
+          if (salePriceRange[1]) {
+            salePriceStr += '-' + currencyStr + salePriceRange[1];
           }
-          product['priceStr'] = priceStr
-          product['salePriceStr'] = salePriceStr
+
+          if (salePriceRange[0] !== priceRange[0]) {
+            priceStr = '￥' + priceRange[0];
+          }
+          if (priceRange[1] && priceRange[1] !== salePriceRange[1]) {
+            priceStr = currencyStr + priceRange[0] + '-' + currencyStr + priceRange[1]
+          }
+
+          let { descriptionList } = product;
+          descriptionList = descriptionList.map((value) => {
+            return ' - ' + value;
+          });
+          
+          product['salePriceStr'] = salePriceStr;
+          product['priceStr'] = priceStr;
           return product;
         })
         category.masterProducts = masterProducts

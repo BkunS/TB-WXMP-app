@@ -9,10 +9,10 @@
     "pages/confirmation/confirmation",
     "pages/orders/orders",
     "pages/order/order",
-    "pages/storeInfo/storeInfo",
+    "pages/stores/stores",
+    "pages/storesList/storesList",
     "pages/blog/blog",
-    "pages/profile/profile",
-    "pages/logs/logs"
+    "pages/profile/profile"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -35,7 +35,7 @@
         "text": "购物袋"
       },
       {
-        "pagePath": "pages/storeInfo/storeInfo",
+        "pagePath": "pages/stores/stores",
         "text": "精品店"
       },
       {

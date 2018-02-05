@@ -46,5 +46,11 @@
         营业时间：{{item.businessHour}}
       </view>
     </view>
+    <view> 
+      <navigator url="/pages/storesList/storesList">
+          <button class="button viewAll-button" hover-class="button-hover">查看全部</button>
+      </navigator>
+    </view>
   </view>
+  
 </view>

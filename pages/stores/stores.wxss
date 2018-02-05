@@ -16,3 +16,12 @@
   font-size: 28rpx;
   padding: 5rpx 10rpx;
 }
+
+.button {
+  margin: 30rpx 0;
+}
+
+.viewAll-button {
+  color: white; 
+  background-color: #0c2340;
+}

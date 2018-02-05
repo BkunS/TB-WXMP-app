@@ -29,7 +29,7 @@ Page({
     interval: 5000,
     duration: 1000,
     addToCartBTText: "加入购物袋",
-    buyNowBTText: "立即购买",
+    buyNowBTText: "去结算",
     buttonLoading: false,
     enableSize: false,
     title: "明星产品"
@@ -180,9 +180,9 @@ Page({
     })
   },
   buyNow: function (e) {
-    this.addToCart(e);
-    wx.navigateTo({
-      url: '/pages/checkout/checkout',
+    //this.addToCart(e);
+    wx.switchTab({
+      url: '/pages/cart/cart',
     })
   },
   wechatShare: function(e) {

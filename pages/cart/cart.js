@@ -149,6 +149,9 @@ Page({
         disabled: false
       })
       let cart = [];
+      this.setData({
+        totalPrice: 0
+      });
       storedCart.forEach((item) => {
         wx.request({
           method: 'GET',

@@ -77,15 +77,23 @@ Page({
         let lookbook = res.data
         let { masterProducts } = lookbook;
         masterProducts.map((product) => {
-          const { price, salePrice } = product
-          let currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
-          let salePriceStr = currencyStr + product.salePrice;
-          let priceStr = "";
-          if (price > salePrice) {
-            priceStr = currencyStr + price;
+          const currencyStr = product.currency ? product.currency : app.globalData.defaultCurrency
+          const { priceRange, salePriceRange } = product;
+          let priceStr = '';
+          let salePriceStr = currencyStr + salePriceRange[0]
+          if (salePriceRange[1]) {
+            salePriceStr += '-' + currencyStr + salePriceRange[1];
           }
-          product['priceStr'] = priceStr
-          product['salePriceStr'] = salePriceStr
+
+          if (salePriceRange[0] !== priceRange[0]) {
+            priceStr = '￥' + priceRange[0];
+          }
+          if (priceRange[1] && priceRange[1] !== salePriceRange[1]) {
+            priceStr = currencyStr + priceRange[0] + '-' + currencyStr + priceRange[1]
+          }
+
+          product['salePriceStr'] = salePriceStr;
+          product['priceStr'] = priceStr;
           return product;
         })
         lookbook.masterProducts = masterProducts

@@ -35,7 +35,7 @@
       订单如有更新，我们会通过微信推送及时更新。
     </view>
     <view class="default-view text-view" >
-      订单号：<navigator url="/pages/order/order?id={{order.id}}" class="textUnderLine" style="display: inline">{{order.id}}</navigator>
+      订单号：<navigator url="/pages/orders/orders" class="textUnderLine" style="display: inline">{{order.id}}</navigator>
     </view>
     <button class="button homeButton" hover-class="button-hover" bindtap='homeTap'>继续购物</button>
   </view>

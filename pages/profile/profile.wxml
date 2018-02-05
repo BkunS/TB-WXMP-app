@@ -37,10 +37,16 @@
     </block>
   </view>
   <view class="wrapper-view">
-    <view class="item-view">
-      <navigator url="/pages/orders/orders?userId={{userId}}">
+    <navigator url="/pages/orders/orders?userId={{userId}}" class="item-view">
+      <view>
         查看订单
-      </navigator>
+      </view>
+    </navigator>
+    <view class="item-view">
+      个人信息
+    </view>
+    <view class="item-view">
+      联系我们
     </view>
   </view>
 </view>

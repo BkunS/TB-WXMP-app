@@ -54,7 +54,7 @@ Page({
           page.setData({
             shippingName: res.userName,
             shippingTel: res.telNumber,
-            shippingAddress: `${res.detailInfo}，${res.cityName}, ${res.provinceName}，${res.countyName}`,
+            shippingAddress: `${res.cityName} ${res.countyName} ${res.detailInfo}`,
             shippingPostal: res.postalCode,
             isShippingSet: true,
             disabled: disabled

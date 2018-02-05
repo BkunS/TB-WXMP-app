@@ -1,6 +1,66 @@
 /* pages/orders/orders.wxss */
 .orders-list-wrapper {
   margin: 0;
-  padding: 0 30rpx;
+  padding: 0;
   width: 100vw;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 20rpx 0;
+  padding: 25rpx 30rpx;
+  background-color: white;
+  box-shadow: 0 4rpx 8rpx 0 rgba(0, 0, 0, 0.15);
+}
+
+.order-info {
+  font-size: 30rpx;
+  color: grey;
+  margin: 20rpx;
+}
+
+.product-item {
+  margin: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: 0 2rpx 8rpx 0 rgba(0, 0, 0, 0.15);
+}
+
+.product-item-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10rpx 20rpx;
+}
+
+.product-item-detail-title {
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+.product-item-detail-content {
+  font-size: 20rpx;
+  color: grey;
+}
+
+.product-item-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: space-around;
+  font-size: 30rpx;
+  padding: 0 10rpx;
+  text-align: center;
+}
+
+.order-totalPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 35rpx;
+  margin: 20rpx;
 }

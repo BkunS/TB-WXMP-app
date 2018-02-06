@@ -137,7 +137,7 @@ Page({
     const page = this;
     wx.getStorage({
       key: 'cart',
-      success: function(res) {
+      complete: function(res) {
         let cart = res.data ? res.data : [];
         const productId = page.data.selectedId
         let hasProduct = false;

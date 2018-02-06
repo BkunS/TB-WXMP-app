@@ -14,6 +14,7 @@ Page({
     placeholderHeight: 0,
     backWidth: 0,
     logoWidth: 0,
+    defaultIconHeight: app.globalData.defaultIconHeight,
     canNavBack: false,
   },
   globalMsgLoad: function (e) {
@@ -54,7 +55,9 @@ Page({
    */
   onLoad: function (options) {
     wx.showNavigationBarLoading()
-
+    wx.showLoading({
+      title: '获取信息',
+    });
     const page = this;
     const topNavHeight = app.globalData.topNavHeight
     const placeholderHeight = this.data.placeholderHeight + app.globalData.statusBarHeight +
@@ -112,6 +115,7 @@ Page({
    */
   onReady: function () {
     wx.hideNavigationBarLoading()
+    wx.hideLoading()
   },
 
   /**

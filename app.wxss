@@ -20,6 +20,7 @@ image {
 
 .default-font {
   font-family: noto_sans_sc_regular, FZYouHJW_ZhongXi, Helvetica, Tahoma, sans-serif!important;
+  letter-spacing: 2rpx;
 }
 
 .header {
@@ -80,7 +81,7 @@ image {
 .line {
   width:100%;
   height:2rpx;
-  background: grey;
+  background-color: grey;
   margin: 20rpx 0;
 }
 

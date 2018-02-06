@@ -36,17 +36,44 @@
       <text> {{userInfo.nickName}} </text>
     </block>
   </view>
+  
   <view class="wrapper-view">
-    <navigator url="/pages/orders/orders?userId={{userId}}" class="item-view">
-      <view>
-        查看订单
+    <navigator url="/pages/orders/orders?userId={{userId}}" class="list-view">
+      <view class="icon-view" style="justify-content: flex-end">
+        <image src="../../assets/order.png" id="order" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{orderWidth * 1.3}}rpx; height: {{defaultIconHeight * 1.3}}rpx"/> 
+      </view>
+      <view class="item-text-view">
+          查看订单
+      </view>
+      <view class="icon-view">
+        <image src="../../assets/forward.png" id="forward" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{forwardWidth}}rpx; height: {{defaultIconHeight}}rpx"/> 
       </view>
     </navigator>
-    <view class="item-view">
-      个人信息
-    </view>
-    <view class="item-view">
-      联系我们
-    </view>
+    <view class="line" style="background-color: light-grey"></view>
+    <navigator class="list-view">
+      <view class="icon-view" style="justify-content: flex-end">
+        <image src="../../assets/profile.png" id="profile" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{profileWidth * 1.3}}rpx; height: {{defaultIconHeight * 1.3}}rpx"/> 
+      </view>
+      <view class="item-text-view">
+          个人信息
+      </view>
+      <view class="icon-view">
+        <image src="../../assets/forward.png" id="forward" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{forwardWidth}}rpx; height: {{defaultIconHeight}}rpx"/> 
+      </view>
+    </navigator>
+    <view class="line" style="background-color: light-grey"></view>
+    <navigator class="list-view">
+      <view class="icon-view" style="justify-content: flex-end">
+        <image src="../../assets/call.png" id="call" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{callWidth * 1.3}}rpx; height: {{defaultIconHeight * 1.3}}rpx"/> 
+      </view>
+
+      <view class="item-text-view">
+          联系我们
+      </view>
+      <view class="icon-view">
+        <image src="../../assets/forward.png" id="forward" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{forwardWidth}}rpx; height: {{defaultIconHeight}}rpx"/> 
+      </view>
+    </navigator>
+
   </view>
 </view>

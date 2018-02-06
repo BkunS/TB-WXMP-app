@@ -29,21 +29,21 @@
   
   <view class="orders-list-wrapper">
     <view wx:for="{{orders}}" wx:key="id" class="orders-list">
-        <view class="order-info">
+        <view class="order-info default-font">
             <!--<image src="{{item.image}}" class="item-image" mode="widthFix"></image>-->
-            <view>
+            <view class="order-info-items">
               订单编号：{{item.id}} 
             </view>
-            <view>
+            <view class="order-info-items">
               下单时间：{{item.timeStr}} 
             </view>
-            <view>
+            <view class="order-info-items">
               收件人：{{item.shipment.name}}
             </view>
-            <view wx:if="{{item.shipment.tel}}">
+            <view wx:if="{{item.shipment.tel}}" class="order-info-items">
               联系方式：{{item.shipment.tel}}
             </view>
-            <view> 
+            <view class="order-info-items"> 
               收货地址：{{item.shipment.address}}
             </view>
         </view>
@@ -52,10 +52,12 @@
             <image src="{{item.image}}" mode="widthFix" style="width: 28%; min-width: 28%;" />
             <view class="product-item-detail"> 
               <view class="product-item-detail-title">{{item.displayName}} </view>
-              <view class="product-item-detail-content"> 款号：{{item.productInfo.styleId}} </view>
-              <view class="product-item-detail-content"> 颜色：{{item.productInfo.colorName}} </view>
-              <view class="product-item-detail-content" wx:if="{{item.productInfo.size !== 'N/A'}}"> 尺寸：{{item.productInfo.size}} </view>
-              <view class="product-item-detail-content"> 数量：{{item.quantity}} </view>
+              <view class="product-item-detail-content"> 
+                <view class="product-item-detail-item"> 款号：{{item.productInfo.styleId}} </view>
+                <view class="product-item-detail-item"> 颜色：{{item.productInfo.colorName}} </view>
+                <view wx:if="{{item.productInfo.size !== 'N/A'}}" class="product-item-detail-item"> 尺寸：{{item.productInfo.size}} </view>
+                <view class="product-item-detail-item"> 数量：{{item.quantity}} </view>
+              </view>
             </view>
             <view class="product-item-price">
               <view class="product-item-detail-price">￥{{item.salePrice * item.quantity}} </view>

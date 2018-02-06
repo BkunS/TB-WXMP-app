@@ -118,6 +118,6 @@ App({
     iconZoom: 1.5,
     getTemplateNotificationBaseUrl: 'https://api.weixin.qq.com/cgi-bin/wxopen/template/library/get',
     getTemplateMsgListsBaseUrl: 'https://api.weixin.qq.com/cgi-bin/wxopen/template/library/list',
-    apiBaseUrl: 'https://digital-innovation-180520.appspot.com' // 'http://localhost:10010' 
+    apiBaseUrl: 'https://digital-innovation-180520.appspot.com' // 'http://localhost:10010'  
   }
 })

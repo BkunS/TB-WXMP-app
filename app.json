@@ -28,19 +28,27 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "assets/home-page.png",
+        "selectedIconPath": "assets/home-page-selected1.png"
       },
       {
         "pagePath": "pages/cart/cart",
-        "text": "购物袋"
+        "text": "购物袋",
+        "iconPath": "assets/bag-page.png",
+        "selectedIconPath": "assets/bag-page-selected.png"
       },
       {
         "pagePath": "pages/stores/stores",
-        "text": "精品店"
+        "text": "精品店",
+        "iconPath": "assets/stores-page.png",
+        "selectedIconPath": "assets/stores-page-selected1.png"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "assets/profile-page.png",
+        "selectedIconPath": "assets/profile-page-selected1.png"
       }
     ]
   }

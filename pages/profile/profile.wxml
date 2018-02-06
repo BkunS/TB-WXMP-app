@@ -5,19 +5,19 @@
     <view class="topNavBar" style="height:{{topNavHeight}}rpx;">
       <view wx:if="{{canNavBack}}" class="icon-view align-start">
         <navigator open-type="navigateBack" class="icon-image" style="height: 100%">
-          <image src="../../assets/back.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+          <image src="../../assets/back.png" mode="aspectFit" id="back" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
         </navigator>
       </view>
       <view wx:else class="icon-view align-start">
         <navigator open-type="navigateBack" class="icon-image" style="height: 100%">
-          <image src="../../assets/backEmpty.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+          <image src="../../assets/backEmpty.png" mode="aspectFit" id="back" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
         </navigator>
       </view>
       <view class="icon-view page-title-view" style="text-align: center;">
         {{pageName}}
       </view>
       <view class="icon-view align-end" style="padding: 0 20rpx">
-        <image src="../../assets/backEmpty.png" mode="aspectFit" id="backWidth" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
+        <image src="../../assets/backEmpty.png" mode="aspectFit" id="back" class="icon-image" bindload="iconLoad" style="width: {{backWidth}}rpx;"></image>
       </view>
     </view>
   </view>
@@ -36,17 +36,44 @@
       <text> {{userInfo.nickName}} </text>
     </block>
   </view>
+  
   <view class="wrapper-view">
-    <navigator url="/pages/orders/orders?userId={{userId}}" class="item-view">
-      <view>
-        查看订单
+    <navigator url="/pages/orders/orders?userId={{userId}}" class="list-view">
+      <view class="icon-view" style="justify-content: flex-end">
+        <image src="../../assets/order.png" id="order" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{orderWidth * 1.3}}rpx; height: {{defaultIconHeight * 1.3}}rpx"/> 
+      </view>
+      <view class="item-text-view">
+          查看订单
+      </view>
+      <view class="icon-view">
+        <image src="../../assets/forward.png" id="forward" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{forwardWidth}}rpx; height: {{defaultIconHeight}}rpx"/> 
       </view>
     </navigator>
-    <view class="item-view">
-      个人信息
-    </view>
-    <view class="item-view">
-      联系我们
-    </view>
+    <view class="line" style="background-color: light-grey"></view>
+    <navigator class="list-view">
+      <view class="icon-view" style="justify-content: flex-end">
+        <image src="../../assets/profile.png" id="profile" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{profileWidth * 1.3}}rpx; height: {{defaultIconHeight * 1.3}}rpx"/> 
+      </view>
+      <view class="item-text-view">
+          个人信息
+      </view>
+      <view class="icon-view">
+        <image src="../../assets/forward.png" id="forward" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{forwardWidth}}rpx; height: {{defaultIconHeight}}rpx"/> 
+      </view>
+    </navigator>
+    <view class="line" style="background-color: light-grey"></view>
+    <navigator class="list-view">
+      <view class="icon-view" style="justify-content: flex-end">
+        <image src="../../assets/call.png" id="call" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{callWidth * 1.3}}rpx; height: {{defaultIconHeight * 1.3}}rpx"/> 
+      </view>
+
+      <view class="item-text-view">
+          联系我们
+      </view>
+      <view class="icon-view">
+        <image src="../../assets/forward.png" id="forward" class="icon-image" bindload="iconLoad" mode="aspectFit" style="width: {{forwardWidth}}rpx; height: {{defaultIconHeight}}rpx"/> 
+      </view>
+    </navigator>
+
   </view>
 </view>

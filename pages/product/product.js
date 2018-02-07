@@ -29,7 +29,7 @@ Page({
     interval: 5000,
     duration: 1000,
     addToCartBTText: "加入购物袋",
-    buyNowBTText: "去结算",
+    buyNowBTText: "去购物袋",
     buttonLoading: false,
     enableSize: false,
     title: "明星产品"

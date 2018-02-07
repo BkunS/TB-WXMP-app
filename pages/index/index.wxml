@@ -25,8 +25,8 @@
   </view>
   <view class="placeholder-view" style="height: {{placeholderHeight}}rpx;">
   </view>
-  <view wx:if="{{pageContents.globalMsg}}">
-    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" style="margin-bottom: -10rpx"></image>
+  <view wx:if="{{pageContents.globalMsg}}" class="default-view">
+    <image src="{{pageContents.globalMsg}}" mode="widthFix" class="default-image default-view" style="margin-bottom: -12rpx"></image>
   </view>
 
   <view wx:if="{{lookbooks}}" class="default-view">

@@ -79,9 +79,15 @@
       </navigator>
     </view>
   </view>
+<<<<<<< HEAD
   <view class="fullWidth" wx:else style="text-align: center">
     <image src="../../assets/shoppingBag.gif" mode="widthFix"/>
     购物袋空空如也
+=======
+  <view class="default-view" wx:else>
+    <image src="../../assets/shoppingBag.gif" mode="widthFix" class="default-image"/>
+    <view style="margin: 80rpx 0; text-align: center; font-size: 30rpx;"> 购物袋还是空的呢</view>
+>>>>>>> 131c786... prettify cart and orders page
   </view>
   <view class="fullWidth">
   </view>

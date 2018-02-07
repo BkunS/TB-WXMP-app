@@ -27,7 +27,7 @@
     <image src="{{pageContents.globalMsg}}" mode="widthFix" class="fullWidth" style="margin-bottom: -10rpx" />
   </view>
   
-  <view class="orders-list-wrapper">
+  <view wx:if="{{orders}}" class="orders-list-wrapper">
     <view wx:for="{{orders}}" wx:key="id" class="orders-list">
         <view class="order-info default-font">
             <!--<image src="{{item.image}}" class="item-image" mode="widthFix"></image>-->
@@ -70,5 +70,8 @@
           style="margin-left: 0; margin-right: 0; color: white; background-color: #0c2340"> 查看物流 </button> </view>
         </view>
     </view>
+  </view>
+  <view wx:else style="margin: 100rpx 0; text-align: center; font-size: 30rpx">
+    没有订单记录
   </view>
 </view>

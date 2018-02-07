@@ -5,16 +5,16 @@
 }
 
 .lookbook-title-view {
-  margin-top: 20rpx;
-  margin-bottom: 20rpx;
-  font-size: 35rpx;
+  margin-top: 30rpx;
+  margin-bottom: 15rpx;
+  font-size: 38rpx;
   font-weight: 500;
   color: #0c2340;
   font-family: noto_sans_sc_regular;
 }
 
 .lookbook-text-view {
-  margin-top: 20rpx;
+  margin-top: 15rpx;
   margin-bottom: 25rpx;
   font-size: 30rpx;
   color: #0c2340;

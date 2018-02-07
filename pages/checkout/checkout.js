@@ -177,7 +177,6 @@ Page({
       },
       data: data,
       success: (res) => {
-        wx.hideLoading();
         wx.setStorage({
           key: 'cart',
           data: [],
@@ -186,11 +185,14 @@ Page({
           url: `/pages/confirmation/confirmation?id=${res.data.id}`
         });
       },
-      fail: (res) => {
+      fail: () => {
         wx.showToast({
           title: '订单提交失败，请重试',
           icon: 'fail'
         });
+      },
+      complete: () => {
+        wx.hideLoading();
       }
     })
     

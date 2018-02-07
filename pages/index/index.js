@@ -4,6 +4,22 @@ const app = getApp()
 
 Page({
   data: {
+    lookbooks: [
+      {
+        "id": "BAYIDgYMCAkNDgIOBAcMAA",
+        "images": [           "https://static.toryburch.com/static/on/demandware.static/-/Sites-ToryBurch_US-Library/default/dw94db172e/images/breaker-content/resort-2018/TBUS_Resort18_1.9_Handbags_LunarNewYear_Breaker_01.jpg",
+          "https://s7.toryburch.com/is/image/ToryBurchNA/TB_47150_600?$mainline_grid_desktop$",
+          "https://s7.toryburch.com/is/image/ToryBurchNA/TB_45028_600?$mainline_grid_desktop$",
+          "https://s7.toryburch.com/is/image/ToryBurchNA/TB_46123_040?$mainline_grid_desktop$",
+          "https://s7.toryburch.com/is/image/ToryBurchNA/TB_46815_604_D?$mainline_pdp_desktop$",
+          "https://s7.toryburch.com/is/image/ToryBurchNA/TB_40590_701?$mainline_grid_desktop$",
+          "https://s7.toryburch.com/is/image/ToryBurchNA/TB_43583_602?$mainline_grid_desktop$",
+          "https://s7.toryburch.com/is/image/ToryBurchNA/TB_46332_640?$mainline_grid_desktop$"
+        ],
+        "title": "新春快乐",
+        "text": "中国新年系列"
+      }
+    ],
     pageContents: {},
     bagEmpty: true,
     statusBarHeight: app.globalData.statusBarHeight,
@@ -80,17 +96,24 @@ Page({
       }
     })
 
-    wx.request({
-      method: 'GET',
-      url: app.globalData.apiBaseUrl + '/v1/lookbooks',
-      header: {
-        'content-type': 'application/json'
+    wx.getSystemInfo({
+      complete: function(res) {
+        let url = app.globalData.apiBaseUrl + '/v1/lookbooks';
+        if (res.platform === 'android') {
+          wx.request({
+            method: 'GET',
+            url: url,
+            header: {
+              'content-type': 'application/json'
+            },
+            success: (res) => {
+              page.setData({
+                lookbooks: res.data
+              })
+            }
+          })
+        }
       },
-      success: (res) => {
-        page.setData({
-          lookbooks: res.data
-        })
-      }
     })
 
     wx.request({

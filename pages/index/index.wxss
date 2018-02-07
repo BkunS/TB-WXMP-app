@@ -5,7 +5,7 @@
 }
 
 .lookbook-title-view {
-  margin-top: 15rpx;
+  margin-top: 20rpx;
   margin-bottom: 20rpx;
   font-size: 35rpx;
   font-weight: 500;

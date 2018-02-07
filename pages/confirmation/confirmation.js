@@ -38,6 +38,13 @@ Page({
       url: '/pages/index/index',
     });
   },
+  reviewOrder: function(e) {
+    const page = this;
+    wx.navigateTo({
+      url: `/pages/orders/orders?userId=${page.data.order.userId}`,
+    })
+  },
+  
   
   /**
    * 生命周期函数--监听页面加载

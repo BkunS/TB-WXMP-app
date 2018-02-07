@@ -74,6 +74,7 @@ Page({
       const userInfo = app.globalData.userInfo;
       const avatarSplit = userInfo.avatarUrl.split('/');
       const userId = avatarSplit[avatarSplit.length - 2];
+      app.globalData['userId'] = userId;
       this.setData({
         userId: userId,
         userInfo: userInfo,
@@ -86,6 +87,7 @@ Page({
         const userInfo = res.userInfo;
         const avatarSplit = userInfo.avatarUrl.split('/');
         const userId = avatarSplit[avatarSplit.length - 2];
+        app.globalData['userId'] = userId;
         this.setData({
           userId: userId,
           userInfo: userInfo,
@@ -100,6 +102,7 @@ Page({
           app.globalData.userInfo = userInfo;
           const avatarSplit = userInfo.avatarUrl.split('/');
           const userId = avatarSplit[avatarSplit.length - 2];
+          app.globalData['userId'] = userId;
           this.setData({
             userId: userId,
             userInfo: userInfo,

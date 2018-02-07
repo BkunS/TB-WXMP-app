@@ -7,7 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    orders: [],
     bagEmpty: true,
     statusBarHeight: app.globalData.statusBarHeight,
     placeholderHeight: 0,
@@ -74,10 +73,12 @@ Page({
         })
       },
       complete: () => {
-        page.setData({
-          orders: updatedOrders
-        })
-        console.log(page.data.orders)
+        if (updatedOrders.length > 0) {
+          page.setData({
+            orders: updatedOrders
+          })
+          console.log(page.data.orders)
+        }
       }
     })
 

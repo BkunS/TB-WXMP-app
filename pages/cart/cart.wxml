@@ -80,9 +80,9 @@
       </navigator>
     </view>
   </view>
-  <view class="default-view" wx:else style="text-align: center">
+  <view class="default-view" wx:else>
     <image src="../../assets/shoppingBag.gif" mode="widthFix" class="default-image"/>
-    购物袋空空如也
+    <view style="margin: 80rpx 0; text-align: center; font-size: 30rpx;"> 购物袋还是空的呢</view>
   </view>
   <view class="default-view">
   </view>
